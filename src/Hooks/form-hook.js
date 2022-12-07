@@ -7,19 +7,17 @@ const formReducer = (state,action)=>{
                 ...state,
                 inputs: {
                     ...state.inputs,
-                    [action.inputId] : {value : action.value}} 
-                } 
-        default : return state
+                    [action.inputId] : action.value} 
+                }
+        default : return state 
     }
 }
 
 export const useForm = (initialInput)=>{
     const [formState,dispatch] = useReducer(formReducer,{inputs : initialInput}) 
 
-    // const inputHandler = (id, value) =>{
-    //     dispatch({type:'INPUT_CHANGE', value : value, inputId : id}) 
-    // }
     const inputHandler = useCallback((id,value)=>{
+
         dispatch({type : 'INPUT_CHANGE', value : value, inputId : id}) 
     },[]) 
 
