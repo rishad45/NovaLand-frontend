@@ -1,0 +1,8 @@
+@import './style.scss';
+.mobile-bottom-navBar{
+    display: none;
+    @include mobile{
+        display: block;
+        bottom: 0;
+    }
+}

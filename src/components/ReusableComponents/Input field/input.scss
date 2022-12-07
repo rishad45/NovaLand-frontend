@@ -1,0 +1,25 @@
+.inputBox {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 1.5rem;
+
+    label {
+        font-family: 'Poppins', sans-serif;
+        font-size: 15px;
+    }
+
+    input {
+        padding: 0.3rem;
+        border: .5px solid lightgray;
+        width: 350px;
+        height: 3vh;
+        &:focus {
+            outline: none;
+            border: double 3px transparent;
+            background-image: linear-gradient(white, white), linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+    }
+}

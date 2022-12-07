@@ -1,0 +1,22 @@
+.authButton {
+    margin: 10px;
+    padding: 8px;
+    border: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: black;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    // text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+
+    &:hover {
+        background-position: right center;
+        /* change the direction of the change here */
+    }
+}

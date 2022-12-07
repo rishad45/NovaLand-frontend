@@ -1,0 +1,13 @@
+@import '../../../style.scss';
+.card{
+    @include themify($themes) {
+        // background-color: #fdfdfd;
+        background-color: themed("bg");
+        border-radius: 5px; 
+        padding: 5px;
+        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+            -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+            box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+    }
+}
+
