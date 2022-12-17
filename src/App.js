@@ -1,76 +1,51 @@
 import {
+  BrowserRouter,
   createBrowserRouter,
   RouterProvider,
   Route,
-  Outlet,
+  Routes,
   Navigate,
 } from "react-router-dom";
-import Navbar from "./components/navbar/Navbar";
-import LeftBar from "./components/leftBar/LeftBar";
-import RightBar from "./components/rightBar/RightBar";
+
 import Home from "./pages/home/Home";
-import "./style.scss";
 import './app.scss'
-import { useContext } from "react";
-import { DarkModeContext } from "./context/darkModeContext";
 import LandingPage from "./pages/Landing Page/LandingPage";
 import Login from "./pages/Login Page/Login";
 import Signup from "./pages/SignUp Page/Signup";
-import MobileNavbar from "./components/MobileBottomNavbar/MobileNavbar";
+import Test from "./components/test/Test";
+import ProtectedRoute from "./components/AuthComponents/ProtectedRoute";
+import PublicRoute from "./components/AuthComponents/PublicRoute";
+import Layout from "./components/Layout/Layout";
+import Profile from "./pages/Profile/Profile";
+import Communities from "./pages/Communities/Communities";
+import CreateCommunity from "./pages/CreateCommunity/CreateCommunity";
 
 function App() {
-  // const {currentUser} = useContext(AuthContext);
-  const { darkMode } = useContext(DarkModeContext)
-  const Layout = () => {
-    return (
-      <div className={`theme-${darkMode ? "dark" : "light"}`}>
-        <Navbar />
-        <div className="mobile-bottom-navBar">
-          <MobileNavbar />
-        </div>
-        <div style={{ display: "flex" }}>
-          <LeftBar />
-          <div style={{ flex: 6 }}>
-            <Outlet />
-          </div>
-          <RightBar />
-        </div>
-      </div>
-    );
-  };
-
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: (
-        <Layout />
-      ),
-      children: [
-        {
-          path: "/",
-          element: <Home />,
-        },
-      ],
-    },
-    {
-      path: "/explore",
-      element: <LandingPage />
-    },
-    {
-      path: "/login",
-      element: <Login />
-    },
-    {
-      path: "/signup",
-      element: <Signup />
-    }
-  ]);
-
   return (
-    <div>
-      <RouterProvider router={router} />
-    </div>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/"
+            element={
+              <ProtectedRoute><Home /></ProtectedRoute>
+            }></Route>
+          <Route path="test" element={
+            <ProtectedRoute><Test /></ProtectedRoute>
+          }></Route>
+          <Route path="profile" element={<Profile />}></Route>
+          <Route path="communities" element={<Communities />}></Route>
+          <Route path="create-community" element={
+            <ProtectedRoute><CreateCommunity /></ProtectedRoute>
+          }></Route>
+        </Route>
+        <Route path="/login" element={
+          <Login /> 
+        }></Route>
+        <Route path="/explore" element={<LandingPage />}></Route>
+        <Route path="/signup" element={<Signup />}></Route>
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
 export default App;

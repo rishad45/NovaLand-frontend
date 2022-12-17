@@ -11,12 +11,12 @@ const RightBar = () => {
     {
       logo: 'https://images.pexels.com/photos/209728/pexels-photo-209728.jpeg?auto=compress&cs=tinysrgb&w=600',
       name: 'Google Developers Community',
-      id: 1
+      id: 2
     },
     {
       logo: 'https://images.pexels.com/photos/209728/pexels-photo-209728.jpeg?auto=compress&cs=tinysrgb&w=600',
       name: 'Mave communs',
-      id: 1
+      id: 3
     },
   ]
   return (

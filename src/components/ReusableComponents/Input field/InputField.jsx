@@ -15,6 +15,7 @@ const inputReducer = (state, action) => {
     }
 }
 
+
 const InputField = (props) => {
     // password visibility toggle
     const [visible, setVisibility] = useState(false)
@@ -51,8 +52,9 @@ const InputField = (props) => {
         props.type === 'password' ? inputElement :
             (<input id={props.id} name={props.name} type={props.type} placeholder={props.placeholder} onChange={changeHandler} value={inputState.value} ></input>)
     ) : (
-        <textarea name={props.name} rows={props.row || 3} onChange={changeHandler} value={inputState.value}></textarea>
+        <textarea name={props.name} rows={props.row || 3} onChange={changeHandler} value={inputState.value}></textarea>  
     )
+
     return (
         <div className='inputBox'>
             <label htmlFor={props.id}>{props.label}</label>

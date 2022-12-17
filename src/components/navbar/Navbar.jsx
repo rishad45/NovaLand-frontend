@@ -36,6 +36,7 @@ const Navbar = () => {
       <div className="right">
         {/* <PersonOutlinedIcon /> */}
         {/* <EmailOutlinedIcon /> */}
+        {/* <Link to='/login'>login</Link> */}
         <ChatOutlinedIcon/>
         {/* <NotificationsOutlinedIcon /> */}
         <div className="user">

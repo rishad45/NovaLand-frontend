@@ -1,3 +1,9 @@
+import { useEffect, useState } from 'react'
+// import { axiosPrivate as axios} from '../../Apis/Axios'; 
+// import axios from '../../Apis/Axios'
+import useAxiosprivate from '../../Hooks/useAxiosprivate';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+
 import "./leftBar.scss";
 import Friends from "../../assets/1.png";
 import Groups from "../../assets/2.png";
@@ -22,28 +28,63 @@ import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsAc
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { useNavigate } from 'react-router-dom';
 
 const LeftBar = () => {
+  const axiosPrivate = useAxiosprivate()
+  let isMounted = true
+  // const [user, setUser] = useState('')
+  const controller = new AbortController()
+  const navigate = useNavigate()
+  // get user function
+  // const getUser = async () => {
+  //   try {
+  //     const response = await axiosPrivate.post('/get-user', {
+  //       signal: controller.signal
+  //     })
+  //     console.log(response.data)
+  //     isMounted && setUser(response?.data?.userName)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+  // // on mounting 
+  // useEffect(() => {
+  //   getUser()
+  //   console.log(user)
+  //   //cleanup
+  //   return () => {
+  //     // isMounted = false
+  //     controller.abort()
+  //   }
+  // }, [])
+
+
   const menu = [
     {
       icon: <HomeOutlinedIcon />,
-      label: 'Home'
+      label: 'Home',
+      route : '/'
     },
     {
       icon: <Diversity3OutlinedIcon />,
-      label: 'Communities'
+      label: 'Communities',
+      route : 'communities'
     },
     {
       icon: <NotificationsActiveOutlinedIcon />,
-      label: 'Notifications'
+      label: 'Notifications',
+      route : 'notifications'
     },
     {
-      icon: <CalendarMonthIcon/>,
-      label: 'Events' 
+      icon: <CalendarMonthIcon />,
+      label: 'Events',
+      route : 'events'
     },
     {
       icon: <SettingsOutlinedIcon />,
-      label: 'Settings'
+      label: 'Settings',
+      route : 'settings'
     },
   ]
 
@@ -57,7 +98,7 @@ const LeftBar = () => {
                 <img src="https://i.pinimg.com/236x/dd/e9/f3/dde9f341bb8aa274949d0b0ef347352d.jpg" alt="" />
               </div>
               <div className="userNames">
-                <span className="name">Rishad Paduvil</span>
+                  <span className="name">Rishad</span>
                 <span className="userName">@whois_rishad</span>
               </div>
             </Card>
@@ -72,7 +113,7 @@ const LeftBar = () => {
               return <div className="item" key={index}>
                 {/* <img src={Events} alt="" /> */}
                 {item.icon}
-                <span>{item.label}</span> 
+                <span>{item.label}</span>
               </div>
             })
           }
@@ -81,9 +122,11 @@ const LeftBar = () => {
         <hr />
         <div className="menu">
           <span>Others</span>
-          <div className="item">
-            <img src={Fund} alt="" />
-            <span>Fundraiser</span>
+          <div className="item" onClick={()=> {
+            navigate('/create-community') 
+          }}>
+          <AddCircleIcon/>
+            <span>Create community</span>
           </div>
           <div className="item">
             <img src={Tutorials} alt="" />

@@ -1,0 +1,50 @@
+.community-page {
+    .community-switch-navbar {
+        width: 100%;
+        height: 5vh;
+        display: flex;
+        position: sticky;
+        top: calc(10vh);
+        z-index: 999;
+        background-color: white;
+        margin-bottom: 15px;
+
+        .my-communs {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            cursor: pointer;
+
+
+            p {
+                margin-bottom: 3px;
+                font-family: 'Poppins', sans-serif;
+            }
+        }
+
+        .commun-borderBottom {
+            outline: none;
+            border-bottom: double 3px transparent;
+            background-image: linear-gradient(white, white), linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+
+        .suggested-communs {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            cursor: pointer;
+
+            p {
+                margin-bottom: 3px;
+                font-family: 'Poppins', sans-serif;
+            }
+
+        }
+    }
+}

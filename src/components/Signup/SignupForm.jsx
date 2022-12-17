@@ -1,7 +1,8 @@
 import React from 'react'
+import {useNavigate} from 'react-router-dom'
 import { useForm } from "../../Hooks/form-hook";
 import InputField from "../ReusableComponents/Input field/InputField";
-import axios from '../../Constants/Axios'
+import axios from '../../Apis/Axios'
 import AuthButton from '../ReusableComponents/AuthButton/AuthButton';
 
 // toastify
@@ -11,13 +12,16 @@ import 'react-toastify/dist/ReactToastify.css';
 // import {hasError,error} from '../../Constants/formValidation' 
 
 const SignupForm = (props) => {
+    // navigate
+    const navigate = useNavigate()
+
     const submitHandler = (event) => {
         event.preventDefault();
         const isSuccess = validate(formState.inputs)
         if (isSuccess) {
             axios.post('/userSignup', formState.inputs).then((res) => {
-                if (res.data.success) {
-                    toast.success("All success", toastoptions) 
+                if (res.data.success) { 
+                    navigate('/') 
                 } else {
                     toast.error(res.data.message, toastoptions) 
                 }
@@ -43,7 +47,7 @@ const SignupForm = (props) => {
     const validate = ({ userName, email, password, rePassword }) => {
         console.log("in validation")
         if (userName.length === 0) toast.error("user name is required")
-        else if (email.length === 0) toast.error("Email Name is required", toastoptions)
+        else if (email.length === 0) toast.error("Email field is required", toastoptions)
         else if (!/\S+@\S+\.\S+/.test(email)) toast.error("please enter the correct email", toastoptions);
         else if (password.length === 0) toast.error("Password is required", toastoptions)
         else if (password.length < 8) toast.error("Password must have at least 8 characters", toastoptions)
@@ -57,7 +61,7 @@ const SignupForm = (props) => {
         <>
             <form onSubmit={submitHandler}>
 
-                <InputField id="userName" element="input" type="text" label="UserName" onInput={inputHandler}></InputField>
+                <InputField id="userName" element="input" type="text" label="Username" onInput={inputHandler}></InputField>
                 <InputField id="email" element="input" type="email" label="Email" onInput={inputHandler}></InputField>
                 <InputField id="password" element="input" type="password" label="Password" onInput={inputHandler}></InputField>
                 <InputField id="rePassword" element="input" type="password" label="Repeat Password" onInput={inputHandler}></InputField>
