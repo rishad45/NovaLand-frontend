@@ -6,7 +6,7 @@ import CommunitiesNav from '../../components/Communities switchBar/CommunitiesNa
 const Communities = () => {
   return (
     <div className='communitiesAll'>
-          <CommunitiesNav/>
+          <CommunitiesNav/>  
     </div>
   )
 }

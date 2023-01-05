@@ -4,29 +4,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import {useNavigate,useLocation} from 'react-router-dom'
 import useRefreshToken from "./useRefreshToken" 
 
-import {setToken} from '../Redux/Slices/tokenSlice'
-import {setuser} from '../Redux/Slices/userSlice' 
-
 const useAxiosprivate = () => {
     const navigate = useNavigate()
     const location = useLocation() 
     const refresh = useRefreshToken() 
-    const dispatch = useDispatch() 
     // const token = useSelector((state) => state.token)
 
-    useEffect(() => {
-        // interceptors
-        // request interceptor
-        // const requestInterceptor = axiosPrivate.interceptors.request.use(
-        //     config => {
-        //         if(!config.headers['Authorization'] ){
-        //             config.headers['Authorization'] = `Bearer ${token}`;
-        //         }
-        //         return config
-        //     }, (error) => {
-        //         Promise.reject(error) 
-        //     }
-        // )
+    useEffect(() => { 
         // response interceptor
         const responseIntercept = axiosPrivate.interceptors.response.use(
             response => response,
@@ -39,8 +23,6 @@ const useAxiosprivate = () => {
                         newAccessToken = await refresh() 
                     }catch(err){
                         console.log("cannot access refresh token, redirecting to login page")
-                        dispatch(setToken('')) 
-                        dispatch(setuser(null)) 
                         navigate('/login', {state : {from : location },replace : true})
                     }
                     // prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`

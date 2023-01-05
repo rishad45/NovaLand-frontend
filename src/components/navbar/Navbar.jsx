@@ -8,15 +8,71 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
+import { BsChatSquareQuoteFill } from 'react-icons/bs'
+import { Menu, MenuItem } from '@mui/material'
+import { useState } from "react";
+import {useNavigate} from 'react-router-dom'
+import { axiosPrivate } from "../../Apis/Axios";
 
 const Navbar = () => {
-  const { toggle,darkMode} = useContext(DarkModeContext);
+  const navigate = useNavigate()
+  const { toggle, darkMode } = useContext(DarkModeContext);
+
+  // functions 
+  const logout = () => {
+    axiosPrivate.post('/logout').then(res => {
+      console.log(res)
+      navigate('/login')  
+    })
+  }
+  // menu
+  const [anchorEl, setAnchorEl] = useState(null)
+  const opened = Boolean(anchorEl)
+
+  const handleClick = (event) => {
+    event.stopPropagation()
+    setAnchorEl(event.currentTarget);
+  }
+
+  const closeMenu = (e) => {
+    setAnchorEl(null);
+  }
 
   return (
     <div className="navbar">
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={opened}
+        onClose={closeMenu}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      ><div>
+          <MenuItem onClick={closeMenu}>
+            <AccountCircleOutlinedIcon /><span style={{ marginLeft: '12px' }}>Profile</span>
+          </MenuItem>
+          <MenuItem onClick={closeMenu}>
+            <BookmarkBorderOutlinedIcon />
+            <span style={{ marginLeft: '12px' }}>Saved</span>
+          </MenuItem>
+          <MenuItem onClick={closeMenu}>
+            <SettingsOutlinedIcon />
+            <span style={{ marginLeft: '12px' }}>Settings</span>
+          </MenuItem>
+          <MenuItem onClick={logout} sx={{ borderTop: '1px solid black', color: 'red' }}>
+            <LogoutOutlinedIcon />
+            <span style={{ marginLeft: '12px' }}>Logout</span>
+          </MenuItem>
+        </div>
+      </Menu>
       <div className="left">
         <Link to="/" style={{ textDecoration: "none" }}>
           <span>NovaLand</span>
@@ -37,13 +93,16 @@ const Navbar = () => {
         {/* <PersonOutlinedIcon /> */}
         {/* <EmailOutlinedIcon /> */}
         {/* <Link to='/login'>login</Link> */}
-        <ChatOutlinedIcon/>
+        {/* <ChatOutlinedIcon/> */}
+        <BsChatSquareQuoteFill size={'1.5em'} />
         {/* <NotificationsOutlinedIcon /> */}
         <div className="user">
-          <img
-            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
-            alt=""
-          />
+          <button className="userProfileonNav" onClick={handleClick}>
+            <img
+              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
+              alt=""
+            />
+          </button>
         </div>
       </div>
     </div>

@@ -1,0 +1,28 @@
+.postsProfile{
+    width: 100%;
+    height: 100%;
+    .imageGrid{
+        margin-top: 10px;
+        width: 100%;
+        height: 100%;
+        // display: grid;
+        // grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        // grid-template-rows: repeat(auto-fill,minmax(33%, 1fr));
+        // grid: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        .profilePost{
+            width: 32%;
+            height: 40%; 
+            // margin-bottom: 2px;
+            cursor: pointer; 
+            margin-left: 5px;
+            img{
+                width: 100%;
+                height: 100%; 
+                object-fit: cover;
+                // border: 1px solid #ccc;
+            }
+        }
+    }
+}

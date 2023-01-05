@@ -1,0 +1,51 @@
+.postContentModal {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+
+    .file-input-container {
+        height: 5rem;
+        width: 25rem;
+        border-radius: 10px;
+        border: 1px dashed black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .browse-file{
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .post-file-input{
+            height: 100%;
+            width: 100% !important;
+            opacity: 0;
+            
+        }
+        .post-file-input::-webkit-file-upload-button {
+            visibility: hidden;
+        }
+
+        .post-file-input::before {
+            // content: 'Choose a file';
+            display: inline-block;
+            font-size: medium;
+            font-weight: 700;
+        }
+    }
+
+    .inputted-content{
+        display: flex;
+        flex-direction: column;
+        .selected-image{
+            width: 10rem;
+            height: 8rem; 
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain; 
+            }
+        }
+    }
+}

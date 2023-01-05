@@ -1,0 +1,69 @@
+.singleCommunityPage {
+    width: 100%;
+    height: 90vh;
+
+    .profileContent {
+        // background-color: black;
+        width: 100%;
+        height: calc(100% - 25vh);
+        display: flex;
+
+        .aboutSection {
+            height: 100%;
+            width: 36%;
+
+            .bio {
+                height: 60%;
+                width: 100%;
+                display: flex;
+                // align-items: flex-end;
+                flex-direction: column;
+                justify-content: flex-end;
+
+                h4 {
+                    font-family: 'Poppins', sans-serif;
+                }
+
+                .biotext {
+                    font-size: small;
+                    margin-bottom: 5px;
+                    font-family: 'Poppins', sans-serif;
+                }
+            }
+
+            .followdetails {
+                height: 40%;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .followDetItem {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 5px;
+                    margin-right: 8px;
+                    .mainName{
+                        font-weight: 600;
+                    }
+                    span{
+                        font-family: 'Poppins', sans-serif;
+                        font-size: 15px;
+                    }
+
+                }
+            }
+        }
+
+        .postSection {
+            height: 100%;
+            width: 64%;
+            margin-top: 0.5rem; 
+            overflow-y: scroll;
+        }
+        .postSection::-webkit-scrollbar{
+            display: none;
+        }
+
+    }
+}

@@ -14,6 +14,10 @@
     color: themed("textColor");
     z-index: 999;
 
+    .menuSpan{
+      margin-left: 5px;
+    }
+
     .left {
       display: flex;
       align-items: center;
@@ -73,13 +77,17 @@
         @include tablet{
           display: none;
         }
-
-        img {
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          object-fit: cover;
+        .userProfileonNav{
+          border: none;
+          background: none;
+          img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
         }
+
 
         span {}
       }

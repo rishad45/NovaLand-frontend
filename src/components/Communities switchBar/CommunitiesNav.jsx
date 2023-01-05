@@ -10,8 +10,8 @@ const CommunitiesNav = () => {
   let source2 = '/get-user-communities' 
   const [menuItem, setMenu] = useState(1) 
   useEffect(() => {
-    console.log(menuItem)
-  }, [menuItem])
+    console.log(menuItem) 
+  }, [menuItem]) 
 
 
   return (

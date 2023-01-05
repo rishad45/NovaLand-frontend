@@ -9,10 +9,10 @@ import { Provider } from "react-redux";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={Store}> 
-    <React.StrictMode>
+    {/* <React.StrictMode> */}
       <DarkModeContextProvider>
         <App />
       </DarkModeContextProvider>
-    </React.StrictMode>
+    {/* </React.StrictMode> */}
   </Provider>
 );

@@ -1,0 +1,16 @@
+.report-reasons {
+    .singleReason {
+        width: 100%;
+        height: 2.5rem;
+        margin-bottom: 2px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        transition: 0.4s;
+    }
+
+    .singleReason:hover {
+        transform: translate(0, -3px);
+    }
+
+}

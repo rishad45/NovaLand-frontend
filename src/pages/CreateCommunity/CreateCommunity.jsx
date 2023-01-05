@@ -13,7 +13,7 @@ const CreateCommunity = () => {
     const [data, setData] = useState({
         comName : '',
         category : '',
-        privacy : '',
+        privacy : 'Private',
         // profile : null
     }) 
 

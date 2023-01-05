@@ -1,0 +1,67 @@
+.singleComment{
+    width: 100%;
+    min-height: 20%;
+    margin-bottom: 2px;
+    cursor: pointer;
+    .comment-data{
+        display: flex;
+        height: 100%;
+        .singleCommenter-profile{
+            width: 10%;
+            display: flex;
+            // align-items: center;
+            // justify-content: center;
+            img{
+                padding: 2px;
+                width: 35px;
+                height: 35px; 
+                border-radius: 50%;
+            }
+        }
+        .name-and-comment{
+            width: 80%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            .comment-part{
+                height: 75%;
+                .comment-commenter{
+                    font-size: small;
+                    font-family: 'Poppins', sans-serif;
+                    font-weight: 900;
+                    margin-right: 1rem;
+                }
+                .comment-conetent{
+                    font-family: 'Poppins', sans-serif;
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+            }
+            .liked-and-details{
+                height: 25%;
+                display: flex;
+                span{
+                    font-family: 'Poppins', sans-serif;
+                    font-size: 10px;
+                    margin-right: 10px; 
+                }
+                .comment-report-delete-button{
+                    font-size: 15px !important;
+                    position: relative;
+                    visibility: hidden; 
+                }
+
+            }
+        }
+        .comment-like-button{
+            width: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+.singleComment:hover .comment-data .name-and-comment .liked-and-details .comment-report-delete-button{
+    visibility: visible;
+}

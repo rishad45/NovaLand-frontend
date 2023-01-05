@@ -5,7 +5,7 @@ const currentCommunitySlice = createSlice({
     initialState : '',
     reducers : {
         setcurrentCommunity : (state, action) => {
-            const {current} = action.payload
+            const current = action.payload 
             state = current
             return state
         }
@@ -16,4 +16,4 @@ const currentCommunitySlice = createSlice({
 export const {setcurrentCommunity} = currentCommunitySlice.actions
 
 // for store
-export default currentCommunitySlice.reducer
+export default currentCommunitySlice.reducer 

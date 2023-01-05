@@ -19,7 +19,9 @@ import Layout from "./components/Layout/Layout";
 import Profile from "./pages/Profile/Profile";
 import Communities from "./pages/Communities/Communities";
 import CreateCommunity from "./pages/CreateCommunity/CreateCommunity";
-
+import SingleCommunity from "./pages/SingleCommunity/SingleCommunity";
+import Chats from "./pages/Chats/Chats";
+import LayoutHeader from "./components/LayoutHeader/LayoutHeader";
 function App() {
   return (
     <BrowserRouter>
@@ -32,17 +34,32 @@ function App() {
           <Route path="test" element={
             <ProtectedRoute><Test /></ProtectedRoute>
           }></Route>
+          {/* single profile  */}
           <Route path="profile" element={<Profile />}></Route>
-          <Route path="communities" element={<Communities />}></Route>
+          {/* communities */}
+          <Route path="communities" element={
+            <ProtectedRoute><Communities /></ProtectedRoute>
+          }></Route>
+          {/* create community  */}
           <Route path="create-community" element={
             <ProtectedRoute><CreateCommunity /></ProtectedRoute>
           }></Route>
+          {/* single community page  */}
+          <Route path="/singleCommunity" element={
+            <ProtectedRoute><SingleCommunity /></ProtectedRoute>
+          }></Route>
+
         </Route>
         <Route path="/login" element={
-          <Login /> 
+          <Login />
         }></Route>
         <Route path="/explore" element={<LandingPage />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
+        <Route path="/" element={<LayoutHeader />}>
+          <Route path="/chats"
+                element={<Chats/>}> 
+          </Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   )

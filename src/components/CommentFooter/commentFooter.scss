@@ -1,0 +1,61 @@
+.comment-footer-component{
+    .content-first{
+        margin-left: 5px;
+    }
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .like-comment-share{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 25%;
+        .like-comment-share-button{
+            margin-right: 1.2rem;
+        }
+    }
+
+    .likes-and-time-inFooter{
+        width: 100%;
+        height: 30%;
+        .like-count{
+            font-size: 12px;
+            font-family: 'Poppins', sans-serif;
+        }
+    }
+
+    .add-a-comment{
+        width: 100%;
+        height: 45%;
+        display: flex;
+        align-items: center ;
+        .add-comment-box{
+            width: 85%;
+            height: 80%;
+            border-radius: 5px;
+            input {
+                border: none;
+                background-color: inherit;
+                width: 100%;
+                height: 100%;
+                border-radius: 5px; 
+            }
+        }
+        .postButton{
+            padding: 3px;
+            background:none;
+            border: none;
+            color: rgb(28, 238, 238);
+            cursor: pointer;
+
+        }
+        .postButtonDisabled{
+            padding: 3px;
+            background:none;
+            border: none;
+            color: lightblue;
+            cursor: not-allowed;
+        }
+    }
+}

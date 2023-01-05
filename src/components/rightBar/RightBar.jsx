@@ -34,7 +34,7 @@ const RightBar = () => {
                   </div>
                   <div className="joinButton">
                     {/* <button>Join now</button> */}
-                    <Button/>
+                    {/* <Button/> */}
                   </div>
                 </div>
               })
@@ -60,7 +60,7 @@ const RightBar = () => {
           </div>
 
         </div>
-        <div className="item">
+        {/* <div className="item">
           <span>Online Friends</span>
           <div className="user">
             <div className="userInfo">
@@ -172,7 +172,7 @@ const RightBar = () => {
               <span>Jane Doe</span>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

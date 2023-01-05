@@ -1,0 +1,171 @@
+.all-profile-wrapper {
+    width: 100%;
+    height: 25vh;
+
+    .communityPageOptions {
+        cursor: pointer;
+        display: flex;
+        // align-items: flex-end;
+        // justify-content: flex-end;
+        height: 1rem;
+        z-index: 10;
+        align-items: center;
+        justify-content: flex-end;
+
+        .menuButton{
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+    }
+
+    .profile-picture-wrap {
+        border: 1px solid black;
+        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        width: 15vw;
+        height: 35vh;
+        position: absolute;
+        top: 130px;
+        left: 19.5rem;
+        background-color: white;
+        z-index: 100;
+        .changeProfileDivforu{
+            .changeProfileText{
+                position: absolute;
+                color: white;
+                padding: 2px;
+                top: 70%;
+                right: 20%;
+                background-color: rgb(17, 16, 16);
+                visibility: hidden;
+            } 
+        }
+        .changeProfileDivforu:hover .changeProfileText{
+            visibility: visible;
+        }
+
+        .changeCommunity-profile{
+    
+            .comm-profile-changer{
+                display: none;
+            }
+            .com-profile-input-label{
+                display: none;
+            }
+
+            .com-profile-input-label:hover{
+                display: block;
+            }
+
+            
+        }
+        .dp {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .adminProfileImage {
+            cursor: pointer;
+
+        }
+
+        .profileFollow {
+            position: absolute;
+            bottom: 8px;
+        }
+    }
+
+    .profile-wrapper {
+        width: 100%;
+        height: 100%;
+        // background: url(https://i.pinimg.com/564x/ce/52/3e/ce523e25a1a32db94b258348d960fdb5.jpg) no-repeat center center;
+        background-repeat: no-repeat;
+        background: center center;
+        background-size: cover;
+        position: relative;
+        cursor: pointer;
+        .changeCoverText{
+            position: absolute;
+            right: 50%;
+            top: 50%;
+            visibility: hidden;
+            background-color: black;
+            color: white; 
+        }
+
+        .profile-details-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+
+            .profile-empty {
+                width: 50%;
+            }
+
+            .profile-name-container {
+                width: 25%;
+                height: 35%;
+                display: flex;
+                font-family: 'Poppins', sans-serif;
+                flex-direction: column;
+                color: white;
+
+                h2 {
+                    font-weight: 900;
+                    -webkit-text-stroke: 1px;
+                    -webkit-text-stroke-color: black;
+                }
+
+                p {
+                    font-size: small;
+                    -webkit-text-stroke: 0.2px;
+                    -webkit-text-stroke-color: black;
+                    font-weight: 500;
+                }
+            }
+
+            .profile-share-container {
+                width: 25%;
+                height: 25%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+
+                .profile-cover-button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                    border: 1px solid white;
+                    border-radius: 5px;
+                    width: 150px;
+                    height: 30px; 
+
+                    .profile-button-icon {
+                        font-size: small;
+                        color: white;
+                    }
+
+                    .profile-button-text {
+                        font-family: 'Poppins', sans-serif;
+                        font-size: small;
+                        color: white;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+
+    .wrapperAdmin:hover .changeCoverText{
+        visibility: visible;
+    }
+    
+}

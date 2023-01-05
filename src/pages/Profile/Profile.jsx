@@ -30,20 +30,20 @@ const Profile = () => {
         <div className="uInfo">
           <div className="left">
             <a href="http://facebook.com">
-              <FacebookTwoToneIcon fontSize="large" />
+              <FacebookTwoToneIcon fontSize="medium" />
             </a>
             <a href="http://facebook.com">
-              <InstagramIcon fontSize="large" />
+              <InstagramIcon fontSize="medium" />
             </a>
             <a href="http://facebook.com">
-              <TwitterIcon fontSize="large" />
+              <TwitterIcon fontSize="medium" />
             </a>
             <a href="http://facebook.com">
-              <LinkedInIcon fontSize="large" />
+              <LinkedInIcon fontSize="medium" />
             </a>
-            <a href="http://facebook.com">
-              <PinterestIcon fontSize="large" />
-            </a>
+            {/* <a href="http://facebook.com">
+              <PinterestIcon fontSize="medium" />
+            </a> */}
           </div>
           <div className="center">
             <span>Jane Doe</span>
@@ -60,7 +60,7 @@ const Profile = () => {
             <button>follow</button>
           </div>
           <div className="right">
-            <EmailOutlinedIcon />
+            {/* <EmailOutlinedIcon /> */}
             <MoreVertIcon />
           </div>
         </div>

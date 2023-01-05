@@ -1,65 +1,35 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import Post from '../Post/Post';
+import { axiosPrivate } from '../../Apis/Axios';
 import './posts.scss'
+import {Link} from 'react-router-dom' 
 const Posts = () => {
+  const [allPosts, setAllPosts] = useState([])
+  const [deleted, setDeleted] = useState(false)
+  const getPosts = () => {
+    axiosPrivate.post('/get-posts-ofUser').then((res) => {
+      console.log("posts are fetching", res.data.allPosts)
+      setAllPosts(res.data.allPosts)
+    })
+  }
 
-    // temporary data
-    const allPosts = [
-        {
-            id: 1,
-            name: "John Doe",
-            userId: 1,
-            profilePic:
-                "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-            img: "https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        },
-        {
-            id: 2,
-            name: "Jane Doe",
-            userId: 2,
-            profilePic:
-                "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-            desc: "Tenetur iste voluptates dolorem rem commodi voluptate pariatur, voluptatum, laboriosam consequatur enim nostrum cumque! Maiores a nam non adipisci minima modi tempore.",
-        },
-        {
-            id: 3,
-            name: "John Doe",
-            userId: 3,
-            profilePic:
-                "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-            img: "https://images.pexels.com/photos/5581790/pexels-photo-5581790.jpeg?auto=compress&cs=tinysrgb&w=600",
-        },
-        {
-            id: 4,
-            name: "John Doe",
-            userId: 4,
-            profilePic:
-                "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-            img: "https://i.pinimg.com/736x/47/b0/a3/47b0a342924cfd165bb75452e82b6eaf.jpg",
-        },
-        {
-            id: 5,
-            name: "John Doe",
-            userId: 5,
-            profilePic:
-                "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-            img: "https://images.pexels.com/photos/9969181/pexels-photo-9969181.jpeg?auto=compress&cs=tinysrgb&w=600",
-        },
-    ];
+  useEffect(() => {
+    getPosts()
+  }, [deleted])
 
-    return (
-        <div className='posts'> 
-            {
-                allPosts.map((post)=>{
-                    return <Post post={post} key={post.id}/> 
-                })
-            }
-        </div>
-    )
+  return (
+    <div className='posts'>
+      {
+        allPosts.length === 0 ? (<div style={{height:'40vh',width:'100%',display: 'flex', alignItems:'center',justifyContent:'center', flexDirection:'column'}}> 
+          <h3>Follow More communities to see posts</h3>
+          <Link to={'/communities'}>Tap to See all communities</Link>
+        </div>) :
+          allPosts.map((post) => {
+            return <Post post={post} key={post.post._id} setDeleted={setDeleted} />
+          })
+      }
+    </div>
+  )
 }
 
 export default Posts

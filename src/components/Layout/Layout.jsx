@@ -11,7 +11,7 @@ import MobileNavbar from '../MobileBottomNavbar/MobileNavbar'
 const Layout = () => {
     const { darkMode } = useContext(DarkModeContext) 
     return (
-        <div className={`theme-${darkMode ? "dark" : "light"}`}>
+        <div className={`theme-${darkMode ? "dark" : "light"}`}> 
             <Navbar />
             <div className="mobile-bottom-navBar">
                 <MobileNavbar />
