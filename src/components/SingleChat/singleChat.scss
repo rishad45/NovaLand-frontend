@@ -1,0 +1,107 @@
+.singleChatBox{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    .headerPart-single{
+        width: 100%;
+        height: 10%;
+        border: 0.5px solid lightgrey;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        .frt{
+            width: 30%;
+            display: flex;
+            align-items: center;
+            .roomProfile{
+                margin-left: 5px;
+                width: 50px;
+                height: 50px;
+    
+                img{
+                    height: 100%;
+                    width: 100%;
+                    border-radius: 50%;
+                }
+            }
+        }
+        span{
+            margin-left: 10px;
+        }
+    }
+    .message-single{
+        width: 100%;
+        height: 85%;
+        border: 0.5px solid lightgrey;
+        overflow-y: scroll;
+        
+        .chatItemOwn{
+            display: flex;
+            justify-content: flex-end;
+
+            .chatCont{
+                background-color: #f0b342;
+            }
+        }
+        .chat{
+            .chatCont{
+                display: flex;
+                flex-direction: column;
+                padding: 3px;
+                min-width: 10rem;
+                margin: 5px 5px;
+                border-radius: 12px;
+                
+                span{
+                    font-family: 'Poppins', sans-serif;
+                }
+                .chatter{
+                    font-size: small;
+                    margin-right: 8px;
+                }
+            }
+        }
+        .chatItem{
+            display: flex;
+            justify-content: flex-start;
+            .chatCont{
+                background-color: #e2e2e2;
+            }
+        }
+    }
+    .footer-single{
+        width: 100%;
+        height: 5%;
+        // border: 0.5px solid lightgrey;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        .emojiButton{
+            background: none;
+            border: none;
+            margin: 0px 5px;
+        }
+        .messageIp{
+            height: 100%;
+            border: none;
+            width: 20rem;
+        }
+        .sendMess{
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
+            justify-content: space-around;
+            height: 80%;
+            width: 8rem;
+            padding: 2px;
+            border: none;
+            background-color: #f0b342;
+            margin-left: 3rem;
+            span{
+                font-family: 'Poppins', sans-serif;
+                font-size: small;
+            }
+        }
+    }
+}

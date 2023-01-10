@@ -22,6 +22,9 @@ import CreateCommunity from "./pages/CreateCommunity/CreateCommunity";
 import SingleCommunity from "./pages/SingleCommunity/SingleCommunity";
 import Chats from "./pages/Chats/Chats";
 import LayoutHeader from "./components/LayoutHeader/LayoutHeader";
+import ResetPassword from "./components/Login/ResetPassword";
+import ForgotPassword from "./components/Login/ForgotPassword";
+import Notifications from "./pages/Notifications/Notifications";
 function App() {
   return (
     <BrowserRouter>
@@ -35,7 +38,7 @@ function App() {
             <ProtectedRoute><Test /></ProtectedRoute>
           }></Route>
           {/* single profile  */}
-          <Route path="profile" element={<Profile />}></Route>
+          <Route path="profile/:userName" element={<ProtectedRoute><SingleCommunity isprofile={true} /></ProtectedRoute>}></Route>   
           {/* communities */}
           <Route path="communities" element={
             <ProtectedRoute><Communities /></ProtectedRoute>
@@ -48,18 +51,28 @@ function App() {
           <Route path="/singleCommunity" element={
             <ProtectedRoute><SingleCommunity /></ProtectedRoute>
           }></Route>
+          <Route path="/testing" element={<Profile/>}></Route>
+          <Route path="/notifications" element={<Notifications/>}></Route>
 
         </Route>
         <Route path="/login" element={
           <Login />
         }></Route>
+        <Route path="/reset-password" element={<ForgotPassword/>}></Route>
+        <Route exact path="/reset-my-password" element={<ResetPassword/>}></Route>
         <Route path="/explore" element={<LandingPage />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/" element={<LayoutHeader />}>
+          {/* ⚠️commenting to design  */}
           <Route path="/chats"
-                element={<Chats/>}> 
+                element={<ProtectedRoute><Chats/></ProtectedRoute>}> 
           </Route>
+          {/* <Route path="/chats"
+                element={<Chats/>}> 
+          </Route> */}
         </Route>
+        <Route path="/error" element={<h1>404 not found</h1>}></Route>
+        <Route path="*" element={<h1>404 not found</h1>}/> 
       </Routes>
     </BrowserRouter>
   )

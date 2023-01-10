@@ -5,10 +5,11 @@ import { axiosPrivate } from '../../Apis/Axios'
 import AuthButton from '../ReusableComponents/AuthButton/AuthButton'
 import Spinner from '../ReusableComponents/Spinner/Spinner' 
 import './changeProfile.scss'
-const ChangeProfile = ({ setShow,setUpdated, which }) => {
+const ChangeProfile = ({ setShow,setUpdated, which, isUser = false }) => {
     console.log("modal opened , ",which) 
     const fd = new FormData()
     const communityId = useSelector((state) => state.currentCommunity)
+    const user = useSelector((state) => state.user) 
 
     const [profile, setProfile] = useState(null) 
     const [url, setUrl] = useState('')
@@ -34,15 +35,17 @@ const ChangeProfile = ({ setShow,setUpdated, which }) => {
         fd.append('image', profile)
         setLoading(true) 
         which === 'cover' && fd.append('cover',true) 
-        axios.post('http://localhost:5000/update-community-profilePicture', fd,
+        isUser ? fd.append('userId',user.id) : fd.append('userId','')  
+
+        axios.post('http://localhost:5000/update-profilePicture', fd, 
             {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
-                withCredentials: true.valueOf
+                withCredentials: true  
             }).then((res) => {
                 console.log(res)
-                setLoading(false)
+                setLoading(false) 
                 close()
                 setUpdated(true) 
             }).catch((err) => {
@@ -64,10 +67,11 @@ const ChangeProfile = ({ setShow,setUpdated, which }) => {
                             <img src={url} height={'50px'} width={'50px'} alt="" />
                         </div>
                         <div className="buttonProfileEDit">
-                            <div className='upload-image-onclick' onClick={uploadImage}><AuthButton label={'Upload'} width={'100px'} height={'20px'}></AuthButton></div>
+                            <div className='upload-image-onclick' onClick={uploadImage}> 
+                                <AuthButton label={'Upload'} width={'100px'} height={'20px'}></AuthButton></div>
                             <div className='upload-goback' onClick={() => { setChanged(false) }}><AuthButton label={'Go back'} width={'100px'} height={'20px'}></AuthButton></div> 
                         </div>
-                    </div>
+                    </div> 
                 ) : (
                     < div className='changeProfileDiv'>
                         <div className='changeProfile-item change-the-profile'> 

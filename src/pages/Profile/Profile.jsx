@@ -16,55 +16,29 @@ const Profile = () => {
     <div className="profile">
       <div className="images">
         <img
-          src="https://images.pexels.com/photos/13440765/pexels-photo-13440765.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          src="https://i.pinimg.com/564x/f5/df/a2/f5dfa284214a9ea20be893633fea69c5.jpg"
           alt=""
           className="cover"
         />
         <img
-          src="https://images.pexels.com/photos/14028501/pexels-photo-14028501.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+          src="https://i.pinimg.com/236x/e8/ad/22/e8ad22eda65d89d0c8189da192d7ead8.jpg"
           alt=""
           className="profilePic"
         />
       </div>
       <div className="profileContainer">
         <div className="uInfo">
-          <div className="left">
-            <a href="http://facebook.com">
-              <FacebookTwoToneIcon fontSize="medium" />
-            </a>
-            <a href="http://facebook.com">
-              <InstagramIcon fontSize="medium" />
-            </a>
-            <a href="http://facebook.com">
-              <TwitterIcon fontSize="medium" />
-            </a>
-            <a href="http://facebook.com">
-              <LinkedInIcon fontSize="medium" />
-            </a>
-            {/* <a href="http://facebook.com">
-              <PinterestIcon fontSize="medium" />
-            </a> */}
-          </div>
           <div className="center">
-            <span>Jane Doe</span>
-            <div className="info">
-              <div className="item">
-                <PlaceIcon />
-                <span>USA</span>
-              </div>
-              <div className="item">
-                <LanguageIcon />
-                <span>lama.dev</span>
-              </div>
+            <div className="enterContent">
+              <span>Jane Doe</span>
+              <button>follow</button>
             </div>
-            <button>follow</button>
           </div>
           <div className="right">
-            {/* <EmailOutlinedIcon /> */}
             <MoreVertIcon />
           </div>
         </div>
-      <Posts/>
+        {/* <Posts /> */} 
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ const Posts = () => {
   }, [deleted])
 
   return (
-    <div className='posts'>
+    <div className='posts'> 
       {
         allPosts.length === 0 ? (<div style={{height:'40vh',width:'100%',display: 'flex', alignItems:'center',justifyContent:'center', flexDirection:'column'}}> 
           <h3>Follow More communities to see posts</h3>

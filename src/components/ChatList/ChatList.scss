@@ -6,14 +6,63 @@
     .chatListSearch{
         width: 100%;
         height: 10%;
-        background-color:black;
         display: flex;
         align-items: center;
-        justify-content: center; 
+        justify-content: space-between; 
+        border: 0.5px solid lightgrey;
+        p{
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+        .userImage{
+            margin-left: 7px;
+            height: 50px;
+            width: 50px;
+            img{
+                height: 100%;
+                width: 100%;
+                border-radius: 50%;
+                border: 0.5px solid lightgrey;
+            }
+        }
+
+        .chatsearch{
+            width: 70%;
+            height: 50%;
+        }
     }
     .chatLists{
         width: 100%;
         height: 90%;
-        background-color: azure;
+
+        .currentTab{
+            border-left: 6px solid #f0b342;
+            background-color: rgb(241, 236, 231);
+        } 
+        .chatlist-singleCom{
+            width: 100%;
+            height: 12%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            overflow-x: hidden;
+            span{
+                font-family: 'Poppins', sans-serif;
+                font-size: 15px;
+                font-weight: 500;
+            }
+            img{
+                border-radius: 50%;
+                margin-left: 7px;
+                margin-right: 1.5rem;
+            }
+        }
+        .chatlist-singleCom:hover{
+            overflow-x: hidden;
+            width: 98.5%;
+            border-left: 6px solid #f0b342;
+            background-color: rgb(241, 236, 231);
+        }
     }
 }

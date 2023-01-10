@@ -1,10 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import googleIcon from '../../assets/google-icon.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './login.scss'
 import LoginForm from '../../components/Login/LoginForm'
+import ForgotPassword from '../../components/Login/ForgotPassword'
+import useFetch from '../../Hooks/useFetch'
+import { useEffect } from 'react'
 
 const Login = () => {
+  const navigate = useNavigate()
+  // https://developers.google.com/identity/gsi/web/reference/js-reference
+  const { handleGoogle, loading, error } = useFetch(
+    "http://localhost:5000/login-with-google"
+  );
+
+  useEffect(() => {
+    /* global google */
+    if (window.google) {
+      google.accounts.id.initialize({
+        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+        callback: handleGoogle,
+      });
+
+      google.accounts.id.renderButton(document.getElementById("signupGoogle"), {
+        // type: "standard",
+        theme: "outline",
+        // size: "small",
+        text: "signin_with",
+        shape: "pill",
+      });
+      // google.accounts.id.prompt()
+    }
+  }, [handleGoogle]);
 
   return (
     <div className='loginPage'>
@@ -16,16 +43,22 @@ const Login = () => {
           <div className="loginMiddle">
             <LoginForm />
             <div className='forrgot-password'>
-              <Link className='forgot-link'>Forgot password?</Link>
+              <span className='forgot-link' onClick={() => { navigate('/reset-password') }}>Forgot password?</span>
             </div>
           </div>
           <div className="loginBottom">
             <div style={{ width: '56%', height: '10px', borderBottom: '1px solid black', textAlign: 'center' }}>
               <span style={{ fontSize: '15px', backgroundColor: '#F3F5F6', padding: "0 10px" }} >or</span>
             </div>
-            <div className="signupGoogle">
-              <img src={googleIcon} alt="" />
-            </div>
+
+            {error && <p style={{ color: "red" }}>{error}</p>}
+            {loading ? (
+              <div>Loading....</div>
+            ) : (
+              <div id='signupGoogle' className="signupGoogle">
+              </div>
+            )}
+
             <p>Don't have an account? <Link to='/signup' style={{ textDecoration: 'none' }} className='link-to-signup'>Signup</Link></p>
           </div>
         </div>

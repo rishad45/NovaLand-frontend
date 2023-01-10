@@ -3,13 +3,13 @@
 .stories {
   display: flex;
   gap: 10px;
-  height: 250px;
+  height: 200px;
   width: 100%;
   margin-bottom: 30px;
   overflow: hidden;
 
   @include mobile {
-    height: 70px;
+    height: 70px; 
     margin-bottom: 0;
     justify-content: space-between;
   }
@@ -22,7 +22,7 @@
   .story {
     flex: 1;
     // width: 10rem;
-    border-radius: 10px;
+    border-radius: 10px; 
     overflow: hidden;
     position: relative;
     cursor: pointer;

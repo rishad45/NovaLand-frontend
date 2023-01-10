@@ -13,12 +13,13 @@ const ProtectedRoute = (props) => {
     // axios instance
     const axiosPrivate = useAxiosprivate()
     //  function to verify auth
+    const refresh = useSelector((state)=> state.globalRefresh)
     const getData = () => {
         try {
             axiosPrivate.post('/verifyAuth').then((res) => {
                 console.log("hmmm")
                 if (res.data.success) {
-                    console.log("hmmm successayiii")
+                    console.log("hmmm successayiii") 
                     dispatch(setuser(res.data.user)) 
                     success = true 
                 } else {
@@ -34,7 +35,7 @@ const ProtectedRoute = (props) => {
     useEffect(() => {
         getData() 
         console.log(success)  
-    }, [])
+    }, [refresh])  
 
     if(success){
         return props.children

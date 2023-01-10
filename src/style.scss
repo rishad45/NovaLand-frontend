@@ -5,7 +5,14 @@ $themes:(
     logo:#fdc53e,
     bgsoft:#f6f3f3,
     textColorSoft:#555,
-    border:lightgrey
+    border:lightgrey,
+    superNova : #fbc40e,
+    dain : #55619f,
+    rhino : #343f71,
+    twilite : #e9d8e4,
+    pomegranate : #f34c19,
+    fontFam : 'Poppins',
+    luxuryBg : #d8c277
   ),
   dark:(
     textColor: whitesmoke,
@@ -13,7 +20,8 @@ $themes:(
     logo:#fdc53e,
     bgsoft:#333,
     textColorSoft:lightgrey,
-    border:#444
+    border:#444,
+    luxury: #1b1e23
   )
 
 );

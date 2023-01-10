@@ -155,7 +155,7 @@ const Post = ({ post, setDeleted }) => {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          disableAutoFocus
+          disableAutoFocus 
           sx={{
             border: 'none'
           }}

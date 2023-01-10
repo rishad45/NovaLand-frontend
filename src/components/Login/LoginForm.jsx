@@ -10,7 +10,7 @@ import InputField from '../ReusableComponents/Input field/InputField'
 // toastify
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import {setuser} from '../../Redux/Slices/userSlice'
 // axios
 import axios from '../../Apis/Axios' 
 
@@ -29,9 +29,7 @@ const LoginForm = (props) => {
     if (isSuccess) {
       axios.post('/login', formState.inputs).then((res) => {
         if (res.data.success) {
-          // const accessToken = res.data.accessToken  
-          // console.log(accessToken)
-          // dispatch(setToken(accessToken)) 
+          dispatch(setuser(res.data.user)) 
           navigate(from, {replace : true}) 
         } 
         else { toast.error(res.data.message) }

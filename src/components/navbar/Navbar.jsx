@@ -13,25 +13,44 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { BsChatSquareQuoteFill } from 'react-icons/bs'
 import { Menu, MenuItem } from '@mui/material'
 import { useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { axiosPrivate } from "../../Apis/Axios";
+import { useDispatch, useSelector } from "react-redux";
+import {setuser} from '../../Redux/Slices/userSlice' 
 
 const Navbar = () => {
+  const user = useSelector((state) => state.user)   
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+
   const { toggle, darkMode } = useContext(DarkModeContext);
 
   // functions 
   const logout = () => {
     axiosPrivate.post('/logout').then(res => {
       console.log(res)
-      navigate('/login')  
+      dispatch(setuser({
+        id : '',    
+        username : '',
+        email : '',
+        bio : '',
+        profileUrl: '',
+      }))
+      navigate('/login')
     })
   }
+
+  const openProfile = () => {
+    navigate(`/profile/${user.username}`)  
+    closeMenu()
+  } 
+
   // menu
   const [anchorEl, setAnchorEl] = useState(null)
   const opened = Boolean(anchorEl)
@@ -45,6 +64,10 @@ const Navbar = () => {
     setAnchorEl(null);
   }
 
+  useEffect(() => {
+    console.log(user) 
+  },[user])  
+
   return (
     <div className="navbar">
       <Menu
@@ -56,7 +79,7 @@ const Navbar = () => {
           'aria-labelledby': 'basic-button',
         }}
       ><div>
-          <MenuItem onClick={closeMenu}>
+          <MenuItem onClick={openProfile}>
             <AccountCircleOutlinedIcon /><span style={{ marginLeft: '12px' }}>Profile</span>
           </MenuItem>
           <MenuItem onClick={closeMenu}>
@@ -94,7 +117,7 @@ const Navbar = () => {
         {/* <EmailOutlinedIcon /> */}
         {/* <Link to='/login'>login</Link> */}
         {/* <ChatOutlinedIcon/> */}
-        <BsChatSquareQuoteFill size={'1.5em'} />
+        {/* <BsChatSquareQuoteFill size={'1.5em'} /> */}
         {/* <NotificationsOutlinedIcon /> */}
         <div className="user">
           <button className="userProfileonNav" onClick={handleClick}>

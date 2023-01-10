@@ -14,7 +14,7 @@ const useAxiosprivate = () => {
         // response interceptor
         const responseIntercept = axiosPrivate.interceptors.response.use(
             response => response,
-            async(error) => {
+            async(error) => { 
                 let newAccessToken
                 const prevRequest = error?.config
                 if(error?.response?.status === 403 && !prevRequest?.sent){

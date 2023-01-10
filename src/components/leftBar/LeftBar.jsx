@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 // import { axiosPrivate as axios} from '../../Apis/Axios'; 
 // import axios from '../../Apis/Axios'
-import useAxiosprivate from '../../Hooks/useAxiosprivate';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import "./leftBar.scss";
@@ -28,19 +27,33 @@ import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsAc
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { setcurrentCommunity } from '../../Redux/Slices/communitySlice'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { axiosPrivate } from '../../Apis/Axios'
 
 const LeftBar = () => {
-  const axiosPrivate = useAxiosprivate()
+
+  const [profile, setProfile] = useState('')
+  const dispatch = useDispatch()
+  const currTab = useSelector((state) => state.tab)
+  const user = useSelector((state) => state.user)
   let isMounted = true
-  // const [user, setUser] = useState('')
   const controller = new AbortController()
   const navigate = useNavigate()
-
   const goto = (route) => {
     console.log("clicked")
     navigate(route)
   }
+
+  const getUserProfile = () => {
+    axiosPrivate.post('/get-userProfile').then(res => {
+      console.log(res)
+      setProfile(res.data.profile)
+    })
+  }
+
+  const refresh = useSelector((state) => state.globalRefresh)
 
   const menu = [
     {
@@ -60,8 +73,8 @@ const LeftBar = () => {
     },
     {
       icon: <CalendarMonthIcon />,
-      label: 'Events',
-      route: '/events'
+      label: 'Messages',
+      route: '/chats'
     },
     {
       icon: <SettingsOutlinedIcon />,
@@ -70,18 +83,25 @@ const LeftBar = () => {
     },
   ]
 
+  useEffect(() => {
+    getUserProfile() 
+  }, [user, refresh])
+
   return (
     <div className="leftBar">
       <div className="container">
         <div className="menu">
-          <div className="top">
-            <Card width={'200px'} height={'10vh'} className='card'>
+          <div className="top" onClick={() => { navigate(`profile/${user.username}`) }}>
+            <Card width={'200px'} height={'10vh'} className='card' >
               <div className="userProfile">
-                <img src="https://i.pinimg.com/236x/dd/e9/f3/dde9f341bb8aa274949d0b0ef347352d.jpg" alt="" />
+                <img src={profile} alt="" />
               </div>
               <div className="userNames">
-                <span className="name">Rishad</span>
-                <span className="userName">@whois_rishad</span>
+                <span className="name">{
+                  user.username.length <= 15 ? user.username : user.username.slice(0,15)
+                }
+                </span>
+                {/* <span className="userName">@whois_rishad</span> */}
               </div>
             </Card>
           </div>
@@ -92,9 +112,9 @@ const LeftBar = () => {
           <span>Explore the world</span>
           {
             menu.map((item, index) => {
-              return <div className="item" key={index} onClick={() => navigate(item.route)}> 
+              return <div className={currTab === index ? 'currTab item' : 'item'} key={index} onClick={() => navigate(item.route)}>
                 {item.icon}
-                <span>{item.label}</span>
+                <span className='iconLabel'>{item.label}</span>
               </div>
             })
           }
@@ -104,18 +124,19 @@ const LeftBar = () => {
         <div className="menu">
           <span>Others</span>
           <div className="item" onClick={() => {
+            dispatch(setcurrentCommunity(''))
             navigate('/create-community')
           }}>
             <AddCircleIcon />
-            <span>Create community</span>
+            <span className='iconLabel'>Create community</span>
           </div>
           <div className="item">
             <img src={Tutorials} alt="" />
-            <span>Tutorials</span>
+            <span className='iconLabel'>Tutorials</span>
           </div>
           <div className="item">
             <img src={Courses} alt="" />
-            <span>Courses</span>
+            <span className='iconLabel'>Courses</span>
           </div>
         </div>
       </div>
