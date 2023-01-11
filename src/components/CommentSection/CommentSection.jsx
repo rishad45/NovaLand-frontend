@@ -35,13 +35,13 @@ const CommentSection = ({ post, likes, liked, setLikes, setLiked,likePost, unLik
     return (
         <div className="modal-comment-content">
             <div className="modal-post-image">
-                <img className='comment-section-image' src='https://i.pinimg.com/736x/eb/3c/8c/eb3c8cbbf54ac1eabb23d0eea135b65c.jpg' alt='error'></img>
+                <img className='comment-section-image' src={post.url} alt='error'></img>
             </div>
             <div className="modal-all-comments">
                 {/* header  */}
                 <div className="modal-comment-headerPart">
                     <div className="header-profile">
-                        <img className='header-profile-image' src="https://i.pinimg.com/736x/eb/3c/8c/eb3c8cbbf54ac1eabb23d0eea135b65c.jpg" alt="" />
+                        <img className='header-profile-image' src={post.communityDp} alt="" />
                     </div>
                     <div className="header-nameCommunity">
                         <span>{post.name}</span>

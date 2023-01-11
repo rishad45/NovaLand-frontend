@@ -54,7 +54,6 @@ const LeftBar = () => {
   }
 
   const refresh = useSelector((state) => state.globalRefresh)
-
   const menu = [
     {
       icon: <HomeOutlinedIcon />,
@@ -94,7 +93,7 @@ const LeftBar = () => {
           <div className="top" onClick={() => { navigate(`profile/${user.username}`) }}>
             <Card width={'200px'} height={'10vh'} className='card' >
               <div className="userProfile">
-                <img src={profile} alt="" />
+                <img src={user.profileUrl} alt="" />
               </div>
               <div className="userNames">
                 <span className="name">{

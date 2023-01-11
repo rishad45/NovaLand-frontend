@@ -98,7 +98,7 @@ const SingleComment = ({ commentData, setDeleted }) => {
                         <FlagIcon /><span style={{ marginLeft: '5px' }}>Report</span>
                     </MenuItem>
                     {
-                        commentData.userDetails[0]._id === user.id ? (
+                        commentData.userDetails._id === user.id ? (
                             <MenuItem onClick={deleteComment} sx={{ color: red['A700'] }}>
                                 <DeleteOutlineIcon /><span style={{ marginLeft: '5px' }}>Delete</span>
                             </MenuItem>) : null
@@ -108,11 +108,11 @@ const SingleComment = ({ commentData, setDeleted }) => {
 
             <div className="comment-data">
                 <div className="singleCommenter-profile">
-                    <img src="https://i.pinimg.com/564x/3a/91/11/3a9111556b14b9fc258468995f966224.jpg" alt="" />
+                    <img src={commentData.userImage} alt="" />
                 </div>
                 <div className="name-and-comment">
                     <div className="comment-part">
-                        <span className='comment-commenter'>{commentData.userDetails[0].userName}</span>
+                        <span className='comment-commenter'>{commentData.userDetails.userName}</span>
                         <span className='comment-conetent'>{commentData.comment}</span>
                     </div>
                     <div className="liked-and-details">

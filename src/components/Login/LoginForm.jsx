@@ -29,7 +29,7 @@ const LoginForm = (props) => {
     if (isSuccess) {
       axios.post('/login', formState.inputs).then((res) => {
         if (res.data.success) {
-          dispatch(setuser(res.data.user)) 
+          dispatch(setuser(res.data.user));
           navigate(from, {replace : true}) 
         } 
         else { toast.error(res.data.message) }

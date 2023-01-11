@@ -34,21 +34,20 @@ const SingleChat = ({ setNewmessage, roomId, setRoom, setSelected }) => {
   }
 
   useEffect(() => {
-
-    // return() => {
-    //   setBack(false);
-    // }
+    console.log(chatRef.current);
+    chatRef.current?.scrollIntoView({behavior: 'smooth'})
   }, [roomId]);
 
-  useLayoutEffect(() => {
-    if(chatRef.current){
-      chatRef.current.scrollTop = chatRef.current.scrollHeight
-    }
-  },[chatRef])
+  // useLayoutEffect(() => {
+  //   if(chatRef.current){
+  //     chatRef.current.scrollTop = chatRef.current.scrollHeight
+  //   }
+  // },[chatRef])
+
 
 
   return (
-    <div className='singleChatBox' ref={chatRef}>
+    <div className='singleChatBox'>
       <div className="headerPart-single">
         <div className='frt'>
           <button style={{border:'none', background:'none', cursor:'pointer'}} onClick={() => {
@@ -65,11 +64,11 @@ const SingleChat = ({ setNewmessage, roomId, setRoom, setSelected }) => {
         </div>
         <span>Commm name</span>
       </div>
-      <div className="message-single" > 
+      <div className="message-single"> 
         {
-          messages.map((chats) => {
+          messages.map((chats, index) => {
             return (
-              <div className={chats.ownedBycurrentUser ? 'chatItemOwn chat' : 'chatItem chat'}>
+              <div className={chats.ownedBycurrentUser ? 'chatItemOwn chat' : 'chatItem chat'} key={index}>
                 <div className='chatCont'>
                   {
                     chats.ownedBycurrentUser ? (
@@ -85,6 +84,7 @@ const SingleChat = ({ setNewmessage, roomId, setRoom, setSelected }) => {
             )
           })
         }
+        <div ref={chatRef}>gdf</div>
       </div>
       <div className="footer-single">
         <button className='emojiButton'><SentimentSatisfiedAltIcon/></button>

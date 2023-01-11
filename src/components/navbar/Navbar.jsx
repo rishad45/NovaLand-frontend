@@ -21,25 +21,53 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { axiosPrivate } from "../../Apis/Axios";
 import { useDispatch, useSelector } from "react-redux";
-import {setuser} from '../../Redux/Slices/userSlice' 
+import { setuser } from '../../Redux/Slices/userSlice'
+import { regSw, subscribe } from '../../helper'
+import axios from "axios";
 
 const Navbar = () => {
-  const user = useSelector((state) => state.user)   
+  const user = useSelector((state) => state.user)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-
+  // search functionalities
+  const [searchKey, setSearchkey] = useState('');
+  const handleChange = (e) => {
+    setSearchkey(e.target.value);
+    if (e.target.value !== '') {
+      axios.post('http://localhost:5000/search', {
+        key: e.target.value
+      }).then((res) => {
+        console.log(res);
+      })
+    }
+  }
+  //.......................
   const { toggle, darkMode } = useContext(DarkModeContext);
 
   // functions 
+  const registerAndSubscribe = async () => {
+    try {
+      const serviceWorkerReg = await regSw()
+      await subscribe(serviceWorkerReg)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const sendMessage = () => {
+    if (window.confirm("Turn on your notification ?")) {
+      registerAndSubscribe()
+    }
+  }
   const logout = () => {
     axiosPrivate.post('/logout').then(res => {
       console.log(res)
       dispatch(setuser({
-        id : '',    
-        username : '',
-        email : '',
-        bio : '',
+        id: '',
+        username: '',
+        email: '',
+        bio: '',
         profileUrl: '',
       }))
       navigate('/login')
@@ -47,9 +75,9 @@ const Navbar = () => {
   }
 
   const openProfile = () => {
-    navigate(`/profile/${user.username}`)  
+    navigate(`/profile/${user.username}`)
     closeMenu()
-  } 
+  }
 
   // menu
   const [anchorEl, setAnchorEl] = useState(null)
@@ -65,70 +93,80 @@ const Navbar = () => {
   }
 
   useEffect(() => {
-    console.log(user) 
-  },[user])  
+    console.log(user)
+  }, [user])
 
   return (
-    <div className="navbar">
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={opened}
-        onClose={closeMenu}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      ><div>
-          <MenuItem onClick={openProfile}>
-            <AccountCircleOutlinedIcon /><span style={{ marginLeft: '12px' }}>Profile</span>
-          </MenuItem>
-          <MenuItem onClick={closeMenu}>
-            <BookmarkBorderOutlinedIcon />
-            <span style={{ marginLeft: '12px' }}>Saved</span>
-          </MenuItem>
-          <MenuItem onClick={closeMenu}>
-            <SettingsOutlinedIcon />
-            <span style={{ marginLeft: '12px' }}>Settings</span>
-          </MenuItem>
-          <MenuItem onClick={logout} sx={{ borderTop: '1px solid black', color: 'red' }}>
-            <LogoutOutlinedIcon />
-            <span style={{ marginLeft: '12px' }}>Logout</span>
-          </MenuItem>
+    <>
+      <div className="navbar">
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={opened}
+          onClose={closeMenu}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
+        ><div>
+            <MenuItem onClick={openProfile}>
+              <AccountCircleOutlinedIcon /><span style={{ marginLeft: '12px' }}>Profile</span>
+            </MenuItem>
+            <MenuItem onClick={closeMenu}>
+              <BookmarkBorderOutlinedIcon />
+              <span style={{ marginLeft: '12px' }}>Saved</span>
+            </MenuItem>
+            <MenuItem onClick={closeMenu}>
+              <SettingsOutlinedIcon />
+              <span style={{ marginLeft: '12px' }}>Settings</span>
+            </MenuItem>
+            <MenuItem onClick={sendMessage}>
+              <NotificationsOutlinedIcon />
+              <span style={{ marginLeft: '12px' }}>Turn on Push notifications</span>
+            </MenuItem>
+            <MenuItem onClick={logout} sx={{ borderTop: '1px solid black', color: 'red' }}>
+              <LogoutOutlinedIcon />
+              <span style={{ marginLeft: '12px' }}>Logout</span>
+            </MenuItem>
+          </div>
+        </Menu>
+        <div className="left">
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <span>NovaLand</span>
+          </Link>
+          {/* <HomeOutlinedIcon /> */}
+          {
+            darkMode ? (
+              <WbSunnyOutlinedIcon onClick={toggle} />
+            ) : <DarkModeOutlinedIcon onClick={toggle} />
+          }
+          {/* <GridViewOutlinedIcon /> */}
+          <div className="search">
+            <SearchOutlinedIcon />
+            <input type="text" placeholder="Search..." value={searchKey} onChange={handleChange} />
+          </div>
         </div>
-      </Menu>
-      <div className="left">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <span>NovaLand</span>
-        </Link>
-        {/* <HomeOutlinedIcon /> */}
-        {
-          darkMode ? (
-            <WbSunnyOutlinedIcon onClick={toggle} />
-          ) : <DarkModeOutlinedIcon onClick={toggle} />
-        }
-        {/* <GridViewOutlinedIcon /> */}
-        <div className="search">
-          <SearchOutlinedIcon />
-          <input type="text" placeholder="Search..." />
+        <div className="right">
+          <div className="user">
+            <button className="userProfileonNav" onClick={handleClick}>
+              <img
+                src={user.profileUrl ? user.profileUrl : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"}
+                alt="error"
+              />
+            </button>
+          </div>
         </div>
       </div>
-      <div className="right">
-        {/* <PersonOutlinedIcon /> */}
-        {/* <EmailOutlinedIcon /> */}
-        {/* <Link to='/login'>login</Link> */}
-        {/* <ChatOutlinedIcon/> */}
-        {/* <BsChatSquareQuoteFill size={'1.5em'} /> */}
-        {/* <NotificationsOutlinedIcon /> */}
-        <div className="user">
-          <button className="userProfileonNav" onClick={handleClick}>
-            <img
-              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
-              alt=""
-            />
-          </button>
+      <div className="searchRes">
+        <div className="singleRes">
+          <div className="leftSingle">
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png" alt="" />
+          </div>
+          <div className="rightSingle">
+            <span>Cricket khiladi</span>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

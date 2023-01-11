@@ -40,9 +40,16 @@
 
                 .followDetItem {
                     display: flex;
+                    flex-direction: column;
                     justify-content: space-between;
                     margin-bottom: 5px;
                     margin-right: 8px;
+                    width: 100%;
+                    .folitm{
+                        display: flex;
+                        width: 100%;
+                        justify-content: space-between;
+                    }
                     .mainName{
                         font-weight: 600;
                     }

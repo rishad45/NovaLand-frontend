@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { axiosPrivate } from '../../Apis/Axios'
 import axios from 'axios'
+import useNotification from '../../Hooks/useNotification'
 function PostContent({ handleClose, setPosted }) {
+  const{sendNotification} = useNotification()
   // current community id
   const communityId = useSelector((state) => state.currentCommunity)
   console.log("looke here for commId", communityId)
@@ -58,13 +60,14 @@ function PostContent({ handleClose, setPosted }) {
         },
         withCredentials: true   
       }).then((res) => {
-        console.log(res)
+        console.log('post created', res);
         handleClose()
         fd.delete('image')
         fd.delete('description')
         fd.delete('location')
         fd.delete('communityId') 
-        setPosted(true) 
+        sendNotification()
+        setPosted(true)
       })
 
   }

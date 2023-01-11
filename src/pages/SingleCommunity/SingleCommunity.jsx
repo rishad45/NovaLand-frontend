@@ -4,6 +4,7 @@ import ProfileWrapper from '../../components/profileWrapper/ProfileWrapper'
 import { axiosPrivate } from '../../Apis/Axios'
 import PostsProfile from '../../components/PostsProfile/PostsProfile'
 import { setcurrentCommunity } from '../../Redux/Slices/communitySlice'
+import { setTab } from '../../Redux/Slices/tabSlice'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
@@ -13,7 +14,9 @@ const SingleCommunity = ({ isprofile = false }) => {
   // everything for single community page 
   const [info, setInfo] = useState({
     name: '',
-    admin: ''
+    admin: '',
+    members: '',
+    postsNo: '',
   })
 
   const [profileInfo, setProfileInfo] = useState({
@@ -47,7 +50,9 @@ const SingleCommunity = ({ isprofile = false }) => {
     axiosPrivate.post('/community-info', payload).then((res) => {
       setInfo({
         name: res.data.info[0].name,
-        admin: res.data.info[0].admin[0].userName
+        admin: res.data.info[0].admin[0].userName,
+        members: res.data.info[0].totalUsers,
+        postsNo: res.data.info[0].totalPosts
       })
 
       setIsmember(res.data.isMember)
@@ -92,21 +97,14 @@ const SingleCommunity = ({ isprofile = false }) => {
 
   useEffect(() => {
     isprofile === false && communityInfo(currCommunity)
+    isprofile === false && dispatch(setTab(1)) 
     isprofile && userProfileInfo()
-  }, [join, leaved, updated, userNameGot])
+    isprofile && dispatch(setTab(null))
 
-  const followdetails = [
-    {
-      id: 1,
-      name: 'Members',
-      count: 2000
-    },
-    {
-      id: 2,
-      name: 'Posts',
-      count: 1548
+    return () => {
+      dispatch(setTab(null))
     }
-  ]
+  }, [join, leaved, updated, userNameGot])
   return (
     <div className='singleCommunityPage'>
       {
@@ -135,11 +133,11 @@ const SingleCommunity = ({ isprofile = false }) => {
             {/* follow details section  */}
             {/* ........................*/}
             {
-              isprofile === false && followdetails.map((i) => {
-                return <div className='followDetItem' key={i.id}>
-                  <span className='mainName'>{i.name}</span> <span className='count'>{i.count}</span>
+              isprofile === false && 
+                 <div className='followDetItem'>
+                  <div className='folitm'><span className='mainName' >Members</span> <span className='count' style={{marginRight:'3rem'}}>{info.members}</span></div>
+                  <div className='folitm'><span className='mainName'>Posts</span> <span className='count' style={{marginRight:'3rem'}}>{info.postsNo}</span></div>
                 </div>
-              })
             }
             {
               isprofile && <div>

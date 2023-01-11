@@ -1,0 +1,73 @@
+.notifications {
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+
+    .singleNotification {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 98%;
+        height: 15%;
+        margin: 5px 0px;
+        border: 1px solid lightgrey;
+        background-color: #ffff;
+        -webkit-box-shadow: 0px 0px 25px 2px rgba(10, 10, 10, 0.09);
+        -moz-box-shadow: 0px 0px 25px 2px rgba(10, 10, 10, 0.09);
+        box-shadow: 0px 0px 25px 2px rgba(10, 10, 10, 0.05);
+
+        .notiLeft {
+            height: 100%;
+            width: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .notiImage {
+                width: 50px;
+                height: 50px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    border: 0.5px solid #f0b342;
+                }
+            }
+        }
+
+        .notiCentre {
+            width: 85%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+
+            .notifyText {}
+        }
+
+        .notiRight {
+            width: 5%;
+            height: 100%;
+            display: flex;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            button {
+                background: none;
+                border: none;
+            }
+        }
+    }
+}
+
+.notifications::-webkit-scrollbar {
+    height: 100%;
+    width: 9px;
+}
+
+.notifications::-webkit-scrollbar-thumb {
+    background-color: #f0b342;
+    border-radius: 8px;
+}

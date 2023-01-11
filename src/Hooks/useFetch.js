@@ -1,9 +1,12 @@
 // useFetch.jsx
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {setuser} from '../Redux/Slices/userSlice';
 import Axios from '../Apis/Axios'
 const useFetch = (url) => {
-    const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -15,6 +18,7 @@ const useFetch = (url) => {
     }).then((res) => {
         console.log('response',res)
         setLoading(false) 
+        dispatch(setuser(res.data.user))
         navigate('/') 
     }).catch((err)=>{
       setLoading(false)

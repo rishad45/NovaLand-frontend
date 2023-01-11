@@ -42,7 +42,7 @@ const ChatList = ({ setRoomId }) => {
                             // toggle(index);
                             openChat(item._id)
                         }}>
-                            <img src="https://i.pinimg.com/736x/93/fc/bb/93fcbb96b2225eb7f153aefbae02c691.jpg" alt="" width={'50px'} height={'50px'} />
+                            <img src={item.image} alt="" width={'50px'} height={'50px'} />
                             <span>{item.name}</span>
                         </div>
                     })

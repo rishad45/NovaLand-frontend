@@ -19,6 +19,7 @@ import swal from 'sweetalert';
 import ModalCustom from '../Modal/ModalCustom';
 import ReportContents from '../ReportContents/ReportContents';
 import Save from '../ReusableComponents/Save/Save';
+import {WhatsappShareButton} from 'react-share'
 
 const Post = ({ post, setDeleted }) => {
   const [liked, setLiked] = useState(false)
@@ -166,7 +167,7 @@ const Post = ({ post, setDeleted }) => {
         </Modal>
         <div className='user'>
           <div className='userInfo'>
-            <img src={post.url} alt="" />
+            <img src={post.communityDp} alt="" />
             <div className="details">
               <div className='detailsDiv' onClick={() => setCurrent(post.post.communityId)}>
                 <span className='name'>{post.name}</span>
@@ -200,7 +201,7 @@ const Post = ({ post, setDeleted }) => {
               <MenuItem onClick={closeMenu}>Share Post</MenuItem>
               <MenuItem onClick={closeMenu}>Copy Link</MenuItem>
               {
-                post.post.userId === user.id || post.communityDetails[0].admin === user.id ? <MenuItem sx={{ color: red['A700'] }} onClick={deletePost}>Delete Post</MenuItem> : null
+                post.post.userId === user.id || post.communityDetails.admin === user.id ? <MenuItem sx={{ color: red['A700'] }} onClick={deletePost}>Delete Post</MenuItem> : null
               }
             </div>
           </Menu>
@@ -225,7 +226,10 @@ const Post = ({ post, setDeleted }) => {
                 </div>
               </div>
               <div className="item">
+                {/* <ShareOutlinedIcon /> */}
+                <WhatsappShareButton url='localhost:3000//hey'>
                 <ShareOutlinedIcon />
+                </WhatsappShareButton>
               </div>
             </div>
             <div className="infoRight">

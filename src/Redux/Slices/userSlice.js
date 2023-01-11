@@ -14,8 +14,9 @@ export const userSlice = createSlice({
             state.id = action?.payload?.id;
             state.username = action.payload?.userName; 
             state.email = action.payload?.email;
-            state.bio = action.payload?.bio 
-            return state 
+            state.bio = action.payload?.bio;
+            state.profileUrl = action.payload?.profile;
+            return state;
         }
     }
 })

@@ -20,7 +20,7 @@ const CommunityList = ({ src, source, isButton = false }) => {
     }
 
     useEffect(() => {
-        console.log("loaded")
+        console.log("loaded") 
         getAllCommunities()
     }, [source,join]) 
 
@@ -37,10 +37,11 @@ const CommunityList = ({ src, source, isButton = false }) => {
                         mainName={item.name}
                         subName={item.privacy}
                         id={item._id}
-                        src={src}
+                        src={item.image}
                         key={item._id}
                         isButton={isButton}
                         setJoin={setJoin}
+                        admin={item.admin} 
                     >
                     </ProfileCard>
                 })

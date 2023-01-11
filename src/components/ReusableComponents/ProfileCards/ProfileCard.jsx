@@ -7,8 +7,10 @@ import {setcurrentCommunity} from '../../../Redux/Slices/communitySlice'
 import AuthButton from '../AuthButton/AuthButton'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import useNotification from '../../../Hooks/useNotification'
 
-const ProfileCard = ({ width, height, src, mainName, subName, isButton, id, setJoin }) => { 
+const ProfileCard = ({ width, height, src, mainName, subName, isButton, id, setJoin, admin}) => { 
+  const{sendNotification} = useNotification()
 
   const joinCommunity = (e) => {
     e.stopPropagation() 
@@ -19,6 +21,7 @@ const ProfileCard = ({ width, height, src, mainName, subName, isButton, id, setJ
     axiosPrivate.post('/joinInCommunity',payload).then((res) => {
       console.log(res) 
       setJoin(true)  
+      sendNotification(admin, `${res.data.user} joined in your community ${mainName}`) 
     })
   }
 
