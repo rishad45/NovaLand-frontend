@@ -8,8 +8,7 @@ import { axiosPrivate } from '../Apis/Axios';
 const NEW_CHAT_MESSAGE_EVENT = 'newMessageChat';
 const SOCKET_SERVER_URL = 'http://localhost:8000';
 
-const useChat = (roomId) => {
-    const user = useSelector((state) => state.user)
+const useChat = (roomId,user) => {
     console.log('room',roomId); 
     const [messages, setMessages] = useState([])
     const socketRef = useRef()
@@ -32,7 +31,7 @@ const useChat = (roomId) => {
         socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
             const incomingMessage = {
                 ...message,
-                user,
+                userName: useChat.userName,
                 ownedBycurrentUser: message.senderId === socketRef.current.id,
             };
             setMessages((messages) => [...messages, incomingMessage])

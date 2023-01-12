@@ -91,23 +91,47 @@
         }
       }
     }
-  }
-}
 
-.searchRes {
-  display: flex;
-  width: 300px;
-  height: 300px;
-  flex-direction: column;
-  background-color: yellow;
+    .searchRes {
+      // display: none;
+      width: 540px;
+      padding: 3px;
+      border-radius: 8px;
+      position: absolute;
+      top: 55px;
+      left: 12.7rem;
+      border: 1px solid themed("border");
+      background-color: themed("bg");
+      .singleRes {
+        cursor: pointer;
+        display: flex;
+        width: 100%;
+        height: 15%;
+        margin-bottom: 5px;
+        align-items: center;
+        justify-content: flex-start;
+        border-bottom: 0.5px solid themed("border");
+        .leftSingle {
+          .leftImg {
+            width: 50px;
+            height: 50px;
 
-  .singleRes {
-    .leftSingle {
-      img {}
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+
+        .rightSingle {
+          span {
+            color: themed("textColor");
+            margin-left: 2rem;
+          }
+        }
+      }
     }
 
-    .rightSingle {
-      span {}
-    }
   }
 }

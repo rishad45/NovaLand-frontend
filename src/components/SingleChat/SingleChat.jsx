@@ -8,12 +8,13 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import SendIcon from '@mui/icons-material/Send';
+import { useSelector } from 'react-redux';
 
 const SingleChat = ({ setNewmessage, roomId, setRoom, setSelected }) => {
   const chatRef = useRef()
   const naviagate = useNavigate();
-
-  const { messages, sendMessage } = useChat(roomId);
+  const user = useSelector((state) => state.user);
+  const { messages, sendMessage } = useChat(roomId, user);
 
   const [input, setInput] = useState('')
 

@@ -23,6 +23,8 @@ import { axiosPrivate } from "../../Apis/Axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setuser } from '../../Redux/Slices/userSlice'
 import { regSw, subscribe } from '../../helper'
+import Spinner from '../ReusableComponents/Spinner/Spinner'
+import {setcurrentCommunity} from '../../Redux/Slices/communitySlice'
 import axios from "axios";
 
 const Navbar = () => {
@@ -32,15 +34,33 @@ const Navbar = () => {
 
   // search functionalities
   const [searchKey, setSearchkey] = useState('');
+  const [searchResult, setSearchRes] = useState([]);
+  const[loading,setLoading] = useState(false)
+
   const handleChange = (e) => {
+    e.target.value === '' ? setDiv(false) : setDiv(true)
     setSearchkey(e.target.value);
     if (e.target.value !== '') {
-      axios.post('http://localhost:5000/search', {
+      setLoading(true);
+      axiosPrivate.post('/search', {
         key: e.target.value
       }).then((res) => {
         console.log(res);
+        setLoading(false)
+        setSearchRes(res.data.result);
       })
     }
+  }
+  const [div, setDiv] = useState(false)
+  const showDiv = (cond) => {
+    setDiv(cond);
+  }
+
+  const setGo = (id) => {
+    setSearchkey('');
+    dispatch(setcurrentCommunity(id))
+    navigate('/singleCommunity')
+    showDiv(false);
   }
   //.......................
   const { toggle, darkMode } = useContext(DarkModeContext);
@@ -91,6 +111,8 @@ const Navbar = () => {
   const closeMenu = (e) => {
     setAnchorEl(null);
   }
+
+
 
   useEffect(() => {
     console.log(user)
@@ -155,15 +177,28 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-      </div>
-      <div className="searchRes">
-        <div className="singleRes">
-          <div className="leftSingle">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png" alt="" />
-          </div>
-          <div className="rightSingle">
-            <span>Cricket khiladi</span>
-          </div>
+        <div className="searchRes" style={div ? { display: 'block' } : { display: 'none' }}>
+          {
+            loading && <Spinner/>
+          }
+          {
+            searchResult.length === 0 ? (
+              <p>No search Results found</p>
+            ) : (
+              searchResult.map((item) => {
+                return <div className="singleRes" key={item._id} onClick={() => {setGo(item._id)}}>
+                  <div className="leftSingle">
+                    <div className="leftImg">
+                      <img src={item.image} alt="" />
+                    </div>
+                  </div>
+                  <div className="rightSingle">
+                    <span>{item.name}</span>
+                  </div>
+                </div>
+              })
+            )
+          }
         </div>
       </div>
     </>
