@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react'
-// import { axiosPrivate as axios} from '../../Apis/Axios'; 
-// import axios from '../../Apis/Axios'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import "./leftBar.scss";
@@ -38,20 +36,15 @@ const LeftBar = () => {
   const dispatch = useDispatch()
   const currTab = useSelector((state) => state.tab)
   const user = useSelector((state) => state.user)
-  let isMounted = true
-  const controller = new AbortController()
   const navigate = useNavigate()
-  const goto = (route) => {
-    console.log("clicked")
-    navigate(route)
-  }
 
-  const getUserProfile = () => {
-    axiosPrivate.post('/get-userProfile').then(res => {
-      console.log(res)
-      setProfile(res.data.profile)
-    })
-  }
+
+  // const getUserProfile = () => {
+  //   axiosPrivate.post('/get-userProfile').then(res => {
+  //     console.log(res);
+  //     setProfile(res.data.profile)
+  //   })
+  // }
 
   const refresh = useSelector((state) => state.globalRefresh)
   const menu = [
@@ -83,7 +76,7 @@ const LeftBar = () => {
   ]
 
   useEffect(() => {
-    getUserProfile() 
+    // getUserProfile() 
   }, [user, refresh])
 
   return (
@@ -97,10 +90,9 @@ const LeftBar = () => {
               </div>
               <div className="userNames">
                 <span className="name">{
-                  user.username.length <= 15 ? user.username : user.username.slice(0,15)
+                  user?.username?.length <= 15 ? user?.username : user?.username?.slice(0,15)
                 }
                 </span>
-                {/* <span className="userName">@whois_rishad</span> */}
               </div>
             </Card>
           </div>

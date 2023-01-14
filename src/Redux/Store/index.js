@@ -4,6 +4,7 @@ import userReducer from '../Slices/userSlice'
 import currentCommunityreducer from '../Slices/communitySlice'
 import globalRefreshReducer from '../Slices/globalRefreshSlice'
 import tabReducer from '../Slices/tabSlice'
+import adminReducer from '../Slices/adminSlice'
 
 import storage from 'redux-persist/lib/storage'
 import {persistReducer} from 'redux-persist' 
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     currentCommunity : currentCommunityreducer,
     globalRefresh : globalRefreshReducer,
     tab : tabReducer,
+    admin: adminReducer,
 })
 
 

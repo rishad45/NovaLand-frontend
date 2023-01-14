@@ -1,0 +1,35 @@
+.adminHome{
+    height: 100%;
+    width: 100%;
+
+    .numbers{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .totalUsers{
+
+        }
+        .totalPosts{
+
+        }
+        .totalCommunities{
+
+        }
+        .numdiv{
+            height: 20vh;
+            width: 20vw;
+            border: 1px solid lightgrey;
+            background-color: lightgrey;
+            margin-right: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            p{
+                font-size: large;
+                font-weight: 900;
+            }
+        }
+    }
+}

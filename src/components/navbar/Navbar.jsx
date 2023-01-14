@@ -27,7 +27,7 @@ import Spinner from '../ReusableComponents/Spinner/Spinner'
 import {setcurrentCommunity} from '../../Redux/Slices/communitySlice'
 import axios from "axios";
 
-const Navbar = () => {
+const Navbar = ({admin = false}) => {
   const user = useSelector((state) => state.user)
   const navigate = useNavigate()
   const dispatch = useDispatch()

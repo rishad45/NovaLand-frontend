@@ -25,20 +25,25 @@ import LayoutHeader from "./components/LayoutHeader/LayoutHeader";
 import ResetPassword from "./components/Login/ResetPassword";
 import ForgotPassword from "./components/Login/ForgotPassword";
 import Notifications from "./pages/Notifications/Notifications";
+import LoginAdmin from "./pages/Admin/Login/LoginAdmin";
+import AdminHome from "./pages/Admin/Home/AdminHome";
+import AdminLayout from "./components/Admin Layout/AdminLayout";
+import Users from "./pages/Admin/Users/Users";
+import Admins from "./pages/Admin/Admins/Admins";
+import AllCommunities from "./components/Admin/AllCommunities";
+import AllPosts from "./components/Admin/AllPosts";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
           <Route path="/"
-            element={
-              <ProtectedRoute><Home /></ProtectedRoute>
-            }></Route>
+            element={<ProtectedRoute><Home /></ProtectedRoute>}></Route>
           <Route path="test" element={
             <ProtectedRoute><Test /></ProtectedRoute>
           }></Route>
           {/* single profile  */}
-          <Route path="profile/:userName" element={<ProtectedRoute><SingleCommunity isprofile={true} /></ProtectedRoute>}></Route>   
+          <Route path="profile/:userName" element={<ProtectedRoute><SingleCommunity isprofile={true} /></ProtectedRoute>}></Route>
           {/* communities */}
           <Route path="communities" element={
             <ProtectedRoute><Communities /></ProtectedRoute>
@@ -51,28 +56,33 @@ function App() {
           <Route path="/singleCommunity" element={
             <ProtectedRoute><SingleCommunity /></ProtectedRoute>
           }></Route>
-          <Route path="/testing" element={<Profile/>}></Route>
-          <Route path="/notifications" element={<Notifications/>}></Route>
+          <Route path="/testing" element={<Profile />}></Route>
+          <Route path="/notifications" element={<Notifications />}></Route>
 
         </Route>
         <Route path="/login" element={
           <Login />
         }></Route>
-        <Route path="/reset-password" element={<ForgotPassword/>}></Route>
-        <Route exact path="/reset-my-password" element={<ResetPassword/>}></Route>
+        <Route path="/reset-password" element={<ForgotPassword />}></Route>
+        <Route exact path="/reset-my-password" element={<ResetPassword />}></Route>
         <Route path="/explore" element={<LandingPage />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/" element={<LayoutHeader />}>
-          {/* ⚠️commenting to design  */}
           <Route path="/chats"
-                element={<ProtectedRoute><Chats/></ProtectedRoute>}> 
+            element={<ProtectedRoute><Chats /></ProtectedRoute>}>
           </Route>
-          {/* <Route path="/chats"
-                element={<Chats/>}> 
-          </Route> */}
         </Route>
+        <Route path="/" element={<AdminLayout />}>
+          <Route path="/admin" element={<AdminHome />}></Route>
+          <Route path="/admin/users" element={<Users/>}></Route>
+          <Route path="/admin/admins" element={<Admins/>}></Route>
+          <Route path="/admin/communities" element={<AllCommunities/>}></Route>
+          <Route path="/admin/posts" element={<AllPosts/>}></Route>
+          {/* <Route path="/admin/"></Route> */}
+        </Route>
+        <Route path="/admin/login" element={<LoginAdmin />}></Route>
         <Route path="/error" element={<h1>404 not found</h1>}></Route>
-        <Route path="*" element={<h1>404 not found</h1>}/> 
+        <Route path="*" element={<h1>404 not found</h1>} />
       </Routes>
     </BrowserRouter>
   )

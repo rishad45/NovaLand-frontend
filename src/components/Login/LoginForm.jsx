@@ -11,17 +11,19 @@ import InputField from '../ReusableComponents/Input field/InputField'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {setuser} from '../../Redux/Slices/userSlice'
+import {setAdmin} from '../../Redux/Slices/adminSlice'
 // axios
 import axios from '../../Apis/Axios' 
 
 //=========main function=====================
-const LoginForm = (props) => {
+const LoginForm = ({admin = false}) => {
   // dispatch
   const dispatch = useDispatch()
   // navigate
   const navigate = useNavigate()
   const location = useLocation()
   const from = location.state?.from?.pathname || "/"  
+  const adminfrom = location.state?.from?.pathname || '/admin'
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -36,6 +38,24 @@ const LoginForm = (props) => {
       })
     }
     console.log(formState.inputs);
+  }
+
+  const adminSubmit = (e) => {
+    e.preventDefault()
+    const isSuccess = validate(formState.inputs)
+    if (isSuccess) {
+      axios.post('/admin/login', formState.inputs).then((res) => {
+        if (res.data.success) {
+          console.log(res.data.admin);
+          dispatch(setAdmin(res.data.admin));
+          navigate(adminfrom, {replace : true});
+        } 
+        else { toast.error(res.data.message) }
+      }).catch((err)=> {
+        toast.error(err);
+      })
+    }
+    console.log("ummm",formState);
   }
 
   const [formState, inputHandler] = useForm({
@@ -62,7 +82,7 @@ const LoginForm = (props) => {
 
   return (
     <>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={admin ? adminSubmit : submitHandler}>
         <InputField id="email" element="input" type="email" label="Email" onInput={inputHandler}></InputField> 
         <InputField id="password" element="input" type="password" label="Password" onInput={inputHandler}></InputField>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

@@ -1,0 +1,30 @@
+.leftBarAdmin {
+    height: 91vh;
+    width: 15vw;
+    display: flex;
+    align-items: flex-start;
+    .menusAdmin {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        .menuItemAdmin {
+            background-color: lightgrey;
+            border: 1px solid lightgrey;
+            margin-bottom: 3px;
+            padding: 5px;
+            cursor: pointer;
+            width: 90%;
+            height: 15%;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            span {}
+        }
+    }
+}

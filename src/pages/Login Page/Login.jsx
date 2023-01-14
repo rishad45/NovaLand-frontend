@@ -7,7 +7,7 @@ import ForgotPassword from '../../components/Login/ForgotPassword'
 import useFetch from '../../Hooks/useFetch'
 import { useEffect } from 'react'
 
-const Login = () => {
+const Login = ({ admin = false }) => {
   const navigate = useNavigate()
   // https://developers.google.com/identity/gsi/web/reference/js-reference
   const { handleGoogle, loading, error } = useFetch(
@@ -41,29 +41,43 @@ const Login = () => {
             <p>Welcome Back</p>
           </div>
           <div className="loginMiddle">
-            <LoginForm />
-            <div className='forrgot-password'>
-              <span className='forgot-link' onClick={() => { navigate('/reset-password') }}>Forgot password?</span>
-            </div>
-          </div>
-          <div className="loginBottom">
-            <div style={{ width: '56%', height: '10px', borderBottom: '1px solid black', textAlign: 'center' }}>
-              <span style={{ fontSize: '15px', backgroundColor: '#F3F5F6', padding: "0 10px" }} >or</span>
-            </div>
-
-            {error && <p style={{ color: "red" }}>{error}</p>}
-            {loading ? (
-              <div>Loading....</div>
-            ) : (
-              <div id='signupGoogle' className="signupGoogle">
+            {
+              admin ? <LoginForm admin={true} /> : <LoginForm/>
+            }
+            {
+              !admin && <div className='forrgot-password'>
+                <span className='forgot-link' onClick={() => { navigate('/reset-password') }}>Forgot password?</span>
               </div>
-            )}
 
-            <p>Don't have an account? <Link to='/signup' style={{ textDecoration: 'none' }} className='link-to-signup'>Signup</Link></p>
+            }
           </div>
+          {
+           !admin && <div className="loginBottom">
+              <div style={{ width: '56%', height: '10px', borderBottom: '1px solid black', textAlign: 'center' }}>
+                <span style={{ fontSize: '15px', backgroundColor: '#F3F5F6', padding: "0 10px" }} >or</span>
+              </div>
+
+              {error && <p style={{ color: "red" }}>{error}</p>}
+              {loading ? (
+                <div>Loading....</div>
+              ) : (
+                <div id='signupGoogle' className="signupGoogle">
+                </div>
+              )}
+
+              <p>Don't have an account? <Link to='/signup' style={{ textDecoration: 'none' }} className='link-to-signup'>Signup</Link></p>
+            </div>
+          }
         </div>
         <div className="loginsecndSide" style={{ width: '40%', height: '100%' }}>
-          <img src="https://i.pinimg.com/564x/c0/c7/5f/c0c75f054c8f8cd6e9b07726d1d4de54.jpg" alt="" />
+          {
+            admin ? (
+              <img src="https://images.pexels.com/photos/12464199/pexels-photo-12464199.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className='adminImage' alt="" />
+            ) : (
+              <img src="https://i.pinimg.com/564x/c0/c7/5f/c0c75f054c8f8cd6e9b07726d1d4de54.jpg" alt="" />
+            )
+          }
+          
         </div>
       </div>
     </div>
