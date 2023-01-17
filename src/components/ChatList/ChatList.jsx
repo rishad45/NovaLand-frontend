@@ -5,8 +5,10 @@ import { axiosPrivate } from '../../Apis/Axios'
 import SearchIcon from '@mui/icons-material/Search';
 import './ChatList.scss'
 import { useRef } from 'react';
-const ChatList = ({ setRoomId }) => {
+import { useSelector } from 'react-redux';
+const ChatList = ({ setRoomId, setInfo }) => {
     const navigate = useNavigate();
+    const user = useSelector((state) => state.user);
     const [participants, setparticipants] = useState([])
     const getAllchats = () => {
         axiosPrivate.get('/get-user-communities').then((result) => {
@@ -14,7 +16,11 @@ const ChatList = ({ setRoomId }) => {
         })
     }
 
-    const openChat = (id) => {
+    const openChat = (id,name,profile) => {
+        setInfo({
+            name : name,
+            profile: profile,
+        })
         setRoomId(id);
         navigate(`/chats?id=${id}`);
     }
@@ -30,9 +36,9 @@ const ChatList = ({ setRoomId }) => {
         <div className='chatListComponent'>
             <div className="chatListSearch">
                 <div className='userImage'>
-                    <img src="https://i.pinimg.com/564x/e4/19/81/e41981c05ba123bd23911143126ed67f.jpg" alt="" />
+                    <img src={user.profileUrl} alt="" />
                 </div>
-                <p>who_is_rishad</p>
+                <p>{user.username}</p>
                 <SearchIcon className='searchicon' style={{ marginRight: '7px', color: 'black' }} />
             </div>
             <div className="chatLists">
@@ -40,7 +46,7 @@ const ChatList = ({ setRoomId }) => {
                     participants.map((item,index) => {
                         return <div className="chatlist-singleCom" key={item._id} id={`flag${index}`} onClick={() => {
                             // toggle(index);
-                            openChat(item._id)
+                            openChat(item._id, item.name, item.image)
                         }}>
                             <img src={item.image} alt="" width={'50px'} height={'50px'} />
                             <span>{item.name}</span>

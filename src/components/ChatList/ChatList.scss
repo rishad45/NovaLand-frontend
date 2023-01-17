@@ -36,7 +36,7 @@
     .chatLists{
         width: 100%;
         height: 90%;
-
+        overflow-y: scroll;
         .currentTab{
             border-left: 6px solid #f0b342;
             background-color: rgb(241, 236, 231);

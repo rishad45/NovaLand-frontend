@@ -9,8 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import SendIcon from '@mui/icons-material/Send';
 import { useSelector } from 'react-redux';
+import { useCallback } from 'react';
 
-const SingleChat = ({ setNewmessage, roomId, setRoom, setSelected }) => {
+const SingleChat = ({ setNewmessage, roomId, setRoom, setSelected, info }) => {
   const chatRef = useRef()
   const naviagate = useNavigate();
   const user = useSelector((state) => state.user);
@@ -25,7 +26,7 @@ const SingleChat = ({ setNewmessage, roomId, setRoom, setSelected }) => {
 
   const send = (e) => {
     e.preventDefault()
-    sendMessage(input);
+    sendMessage(input, user.username);
     console.log(input);
     axiosPrivate.post('/chats/sendChat', {
       receiver: roomId,
@@ -33,6 +34,21 @@ const SingleChat = ({ setNewmessage, roomId, setRoom, setSelected }) => {
     });
     setInput('');
   }
+
+  const ref = useRef(null);
+  const setRef = useCallback((node) => {
+    console.log(1);
+    if(node){
+      console.log("yeyyyyy")
+      node.scrollIntoView(
+        {
+          behavior: 'smooth',
+          block: 'end',
+          inline: 'nearest'
+        });
+    }
+    ref.current = node
+  },[roomId, ref])
 
   useEffect(() => {
     console.log(chatRef.current);
@@ -60,10 +76,10 @@ const SingleChat = ({ setNewmessage, roomId, setRoom, setSelected }) => {
             <ArrowBackIcon />
           </button>
           <div className="roomProfile" style={{cursor:'pointer'}}>
-            <img src="https://i.pinimg.com/564x/0c/36/b0/0c36b040c95c6d6773423f56c8a87822.jpg" alt="" />
+            <img src={info.profile} alt="" />
           </div>
         </div>
-        <span>Commm name</span>
+        <span>{info?.name}</span>
       </div>
       <div className="message-single"> 
         {
@@ -75,7 +91,7 @@ const SingleChat = ({ setNewmessage, roomId, setRoom, setSelected }) => {
                     chats.ownedBycurrentUser ? (
                       <div className='chatcontin' style={{ marginLeft: '5px' }}><span className='chatter'>You</span><span className='chatterTime' style={{ fontSize: '10px' }}>3m</span></div>
                     ) : (
-                      <div style={{ marginLeft: '5px' }}><span className='chatter'>{chats.user?.userName || chats.user?.username }</span><span className='chatterTime' style={{ fontSize: '10px' }}>3m</span></div>
+                      <div style={{ marginLeft: '5px' }}><span className='chatter'>{chats.user?.userName || chats.user?.username || chats?.name }</span><span className='chatterTime' style={{ fontSize: '10px' }}>3m</span></div>
                     )
 
                   }
@@ -85,7 +101,7 @@ const SingleChat = ({ setNewmessage, roomId, setRoom, setSelected }) => {
             )
           })
         }
-        <div ref={chatRef}>gdf</div>
+        <div ref={setRef}></div>
       </div>
       <div className="footer-single">
         <button className='emojiButton'><SentimentSatisfiedAltIcon/></button>

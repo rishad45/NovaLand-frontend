@@ -13,6 +13,10 @@ const Chats = () => {
     const [roomId, setRoomId] = useState(null)
     const [newMessage, setNewmessage] = useState('');
     const [chtSelected, setChtselect] = useState(false);
+    const [commInfo,setInfo] = useState({
+        name: '',
+        profile: ''
+    });
     const[back,setback] = useState(false);
     useEffect(() => {
         roomId !== null && setChtselect(true);
@@ -23,11 +27,11 @@ const Chats = () => {
             <div className="chatsPage">
                 <div className="chatBox">
                     <div className="chatList">
-                        <ChatList setRoomId={setRoomId} />
+                        <ChatList setRoomId={setRoomId} setInfo={setInfo} />
                     </div>
                     <div className="singleChat">
                         {
-                            chtSelected ? (<SingleChat setNewmessage={setNewmessage} roomId={roomId} setRoom={setRoomId} setSelected={setChtselect}/>) : (
+                            chtSelected ? (<SingleChat setNewmessage={setNewmessage} roomId={roomId} setRoom={setRoomId} setSelected={setChtselect} info={commInfo}/>) : (
                                 <div className="startChat">
                                     <img src={MessageSvg} alt="error" srcset="" />
                                     <h3>Tap to a chat to start conversation</h3>

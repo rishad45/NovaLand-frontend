@@ -42,11 +42,12 @@ const useChat = (roomId,user) => {
         };
     }, [roomId])
 
-    const sendMessage = (messageBody) => {
+    const sendMessage = (messageBody, userName) => {
         console.log('bd', messageBody);
         socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
             message: messageBody,
             senderId: socketRef.current.id,
+            name: userName,
         });
     };
 
