@@ -103,6 +103,7 @@ const SingleCommunity = ({ isprofile = false }) => {
 
     return () => {
       dispatch(setTab(null))
+      dispatch(setcurrentCommunity(''))
     }
   }, [join, leaved, updated, userNameGot])
   return (

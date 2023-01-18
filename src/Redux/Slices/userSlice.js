@@ -11,7 +11,8 @@ export const userSlice = createSlice({
     }, 
     reducers : {
         setuser :  (state,action)=>{
-            state.id = action?.payload?.id;
+            console.log('user setting in progress', action);
+            state.id = action?.payload?._id;
             state.username = action.payload?.userName; 
             state.email = action.payload?.email;
             state.bio = action.payload?.bio;

@@ -8,19 +8,22 @@ import AuthButton from '../ReusableComponents/AuthButton/AuthButton';
 // toastify
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { setuser } from '../../Redux/Slices/userSlice';
+import { useDispatch } from 'react-redux';
 
 // import {hasError,error} from '../../Constants/formValidation' 
 
 const SignupForm = (props) => {
     // navigate
     const navigate = useNavigate()
-
+    const dispatch = useDispatch()
     const submitHandler = (event) => {
         event.preventDefault();
         const isSuccess = validate(formState.inputs)
         if (isSuccess) {
             axios.post('/userSignup', formState.inputs).then((res) => {
                 if (res.data.success) { 
+                    dispatch(setuser(res.data.user));
                     navigate('/') 
                 } else {
                     toast.error(res.data.message, toastoptions) 
