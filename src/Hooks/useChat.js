@@ -6,7 +6,7 @@ import socketIOclient from 'socket.io-client'
 import { axiosPrivate } from '../Apis/Axios';
 
 const NEW_CHAT_MESSAGE_EVENT = 'newMessageChat';
-const SOCKET_SERVER_URL = 'http://localhost:8000';
+const SOCKET_SERVER_URL = 'https://novaland.futurestore.website';
 
 const useChat = (roomId,user) => {
     console.log('room',roomId); 

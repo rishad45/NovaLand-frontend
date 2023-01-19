@@ -25,17 +25,7 @@ const ProtectedRoute = (props) => {
             navigate('/login', { state: { from: location }, replace: true });
         }    
         console.log('user is', user);
-        return () => {
-            dispatch(setuser({
-                id: '',
-                userName: '',
-                email: '',
-                _id: '',
-                profile: '',
-                bio: ''
-            }))
-        }
-    }, [user,user.username, location])
+    }, [user.username])
 
     return (
   <>
