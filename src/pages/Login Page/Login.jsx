@@ -6,8 +6,14 @@ import LoginForm from '../../components/Login/LoginForm'
 import ForgotPassword from '../../components/Login/ForgotPassword'
 import useFetch from '../../Hooks/useFetch'
 import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { setuser } from '../../Redux/Slices/userSlice'
 
 const Login = ({ admin = false }) => {
+  const dispatch = useDispatch()
+  const clearRedux = () => {
+    dispatch(setuser(null));
+  }
   const navigate = useNavigate()
   // https://developers.google.com/identity/gsi/web/reference/js-reference
   const { handleGoogle, loading, error } = useFetch(
@@ -31,6 +37,7 @@ const Login = ({ admin = false }) => {
       });
       // google.accounts.id.prompt()
     }
+    clearRedux();
   }, [handleGoogle]);
 
   return (

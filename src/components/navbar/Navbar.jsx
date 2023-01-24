@@ -26,6 +26,7 @@ import { regSw, subscribe } from '../../helper'
 import Spinner from '../ReusableComponents/Spinner/Spinner'
 import {setcurrentCommunity} from '../../Redux/Slices/communitySlice'
 import axios from "axios";
+import logo from '../../assets/logo.jpg'
 
 const Navbar = ({admin = false}) => {
   const user = useSelector((state) => state.user)
@@ -83,13 +84,7 @@ const Navbar = ({admin = false}) => {
   const logout = () => {
     axiosPrivate.post('/logout').then(res => {
       console.log(res)
-      dispatch(setuser({
-        id: '',
-        username: '',
-        email: '',
-        bio: '',
-        profileUrl: '',
-      }))
+      dispatch(setuser(null))
       navigate('/login')
     })
   }
@@ -152,8 +147,9 @@ const Navbar = ({admin = false}) => {
           </div>
         </Menu>
         <div className="left">
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <span>NovaLand</span>
+          <Link to="/" style={{ textDecoration: "none", display: 'flex', alignItems:'center'}}>
+            {/* <img src={logo} alt="" height={'50px'} width={'80px'}/> */}
+            <span style={{marginLeft: '5px'}}>NovaLand</span>
           </Link>
           {/* <HomeOutlinedIcon /> */}
           {

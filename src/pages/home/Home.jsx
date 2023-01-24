@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux"
 const Home = () => {
   const dispatch = useDispatch() 
   useEffect(()=>{
-    dispatch(setTab(0)) 
+    dispatch(setTab(0))
 
     return ()=>{
       setTab(null) 

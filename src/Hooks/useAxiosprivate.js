@@ -1,42 +1,47 @@
 import { axiosPrivate } from "../Apis/Axios"
 import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux' 
-import {useNavigate,useLocation} from 'react-router-dom'
-import useRefreshToken from "./useRefreshToken" 
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate, useLocation } from 'react-router-dom'
+import useRefreshToken from "./useRefreshToken"
+import { setuser } from "../Redux/Slices/userSlice"
 
 const useAxiosprivate = () => {
     const navigate = useNavigate()
-    const location = useLocation() 
-    const refresh = useRefreshToken() 
+    const location = useLocation()
+    const refresh = useRefreshToken()
+    const dispatch = useDispatch()
     // const token = useSelector((state) => state.token)
 
-    useEffect(() => { 
+    useEffect(() => {
         // response interceptor
         const responseIntercept = axiosPrivate.interceptors.response.use(
             response => response,
-            async(error) => { 
+            async (error) => {
                 let newAccessToken
                 const prevRequest = error?.config
-                if(error?.response?.status === 403 && !prevRequest?.sent){
+                if (error?.response?.status === 403 && !prevRequest?.sent) {
+                    console.log(1)
                     prevRequest.sent = true
-                    try{
-                        newAccessToken = await refresh() 
-                    }catch(err){
+                    try {
+                        newAccessToken = await refresh()
+                        console.log('new one is', newAccessToken)
+                    } catch (err) {
                         console.log("cannot access refresh token, redirecting to login page")
-                        navigate('/login', {state : {from : location },replace : true})
+                        dispatch(setuser(null));
+                        navigate('/login', { state: { from: location }, replace: true })
                     }
                     // prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
-                    return axiosPrivate(prevRequest)  
+                    return axiosPrivate(prevRequest)
                 }
                 return Promise.reject(error)
             }
         )
 
-        return ()=>{
+        return () => {
             // axiosPrivate.interceptors.request.eject(requestInterceptor) 
-            axiosPrivate.interceptors.response.eject(responseIntercept) 
+            axiosPrivate.interceptors.response.eject(responseIntercept)
         }
-    }, [refresh]) 
+    }, [refresh])
 
     return axiosPrivate
 
